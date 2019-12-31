@@ -1,12 +1,12 @@
-ZF Apigility Documentation
+Laminas API Tools Documentation
 ==========================
 
-[![Build Status](https://travis-ci.org/zfcampus/zf-apigility-documentation.png)](https://travis-ci.org/zfcampus/zf-apigility-documentation)
+[![Build Status](https://travis-ci.org/laminas-api-tools/api-tools-documentation.png)](https://travis-ci.org/laminas-api-tools/api-tools-documentation)
 
 Introduction
 ------------
 
-This ZF2 module can be used with conjunction with Apigility in order to:
+This Laminas module can be used with conjunction with Laminas API Tools in order to:
 
 - provide an object model of all captured documentation information, including:
   - All APIs available.
@@ -20,7 +20,7 @@ This ZF2 module can be used with conjunction with Apigility in order to:
   - end-users may configure alternate/additional formats via content-negotiation.
 
 This module accomplishes all the above use cases by providing an endpoint to connect to
-(`/apigility/documentation[/:api[-v:version][/:service]]`), using content-negotiation to provide
+(`/api-tools/documentation[/:api[-v:version][/:service]]`), using content-negotiation to provide
 both HTML and JSON representations.
 
 Requirements
@@ -34,14 +34,14 @@ Installation
 Run the following `composer` command:
 
 ```console
-$ composer require "zfcampus/zf-apigility-documentation:~1.0-dev"
+$ composer require "laminas-api-tools/api-tools-documentation:~1.0-dev"
 ```
 
 Alternately, manually add the following to your `composer.json`, in the `require` section:
 
 ```javascript
 "require": {
-    "zfcampus/zf-apigility-documentation": "~1.0-dev"
+    "laminas-api-tools/api-tools-documentation": "~1.0-dev"
 }
 ```
 
@@ -55,7 +55,7 @@ return array(
     /* ... */
     'modules' => array(
         /* ... */
-        'ZF\Apigility\Documentation',
+        'Laminas\ApiTools\Documentation',
     ),
     /* ... */
 );
@@ -70,23 +70,23 @@ This module does not utilize any user configuration.
 
 ### System Configuration
 
-The following configuration is defined by the module to ensure operation within a Zend Framework 2
+The following configuration is defined by the module to ensure operation within a Laminas
 MVC application.
 
 ```php
 'router' => array(
     'routes' => array(
-        'zf-apigility' => array(
+        'api-tools' => array(
             'child_routes' => array(
                 'documentation' => array(
-                    'type' => 'Zend\Mvc\Router\Http\Segment',
+                    'type' => 'Laminas\Mvc\Router\Http\Segment',
                     'options' => array(
                         'route'    => '/documentation[/:api[-v:version][/:service]]',
                         'constraints' => array(
                             'api' => '[a-zA-Z][a-zA-Z0-9_]+',
                         ),
                         'defaults' => array(
-                            'controller' => 'ZF\Apigility\Documentation\Controller',
+                            'controller' => 'Laminas\ApiTools\Documentation\Controller',
                             'action'     => 'show',
                         ),
                     ),
@@ -97,25 +97,25 @@ MVC application.
 ),
 'controllers' => array(
     'factories' => array(
-        'ZF\Apigility\Documentation\Controller' => 'ZF\Apigility\Documentation\ControllerFactory',
+        'Laminas\ApiTools\Documentation\Controller' => 'Laminas\ApiTools\Documentation\ControllerFactory',
     ),
 ),
-'zf-content-negotiation' => array(
+'api-tools-content-negotiation' => array(
     'controllers' => array(
-        'ZF\Apigility\Documentation\Controller' => 'Documentation',
+        'Laminas\ApiTools\Documentation\Controller' => 'Documentation',
     ),
     'accept_whitelist' => array(
-        'ZF\Apigility\Documentation\Controller' => array(
+        'Laminas\ApiTools\Documentation\Controller' => array(
             0 => 'application/vnd.swagger+json',
             1 => 'application/json',
         ),
     ),
     'selectors' => array(
         'Documentation' => array(
-            'ZF\Apigility\Documentation\JsonModel' => array(
+            'Laminas\ApiTools\Documentation\JsonModel' => array(
                 'application/json',
             ),
-            'Zend\View\Model\ViewModel' => array(
+            'Laminas\View\Model\ViewModel' => array(
                 'text/html',
                 'application/xhtml+xml',
             ),
@@ -124,10 +124,10 @@ MVC application.
 ),
 'view_helpers' => array(
     'invokables' => array(
-        'agacceptheaders'      => 'ZF\Apigility\Documentation\View\AgAcceptHeaders',
-        'agcontenttypeheaders' => 'ZF\Apigility\Documentation\View\AgContentTypeHeaders',
-        'agservicepath'        => 'ZF\Apigility\Documentation\View\AgServicePath',
-        'agstatuscodes'        => 'ZF\Apigility\Documentation\View\AgStatusCodes',
+        'agacceptheaders'      => 'Laminas\ApiTools\Documentation\View\AgAcceptHeaders',
+        'agcontenttypeheaders' => 'Laminas\ApiTools\Documentation\View\AgContentTypeHeaders',
+        'agservicepath'        => 'Laminas\ApiTools\Documentation\View\AgServicePath',
+        'agstatuscodes'        => 'Laminas\ApiTools\Documentation\View\AgStatusCodes',
     ),
 ),
 'view_manager' => array(
@@ -137,12 +137,12 @@ MVC application.
 ),
 ```
 
-ZF2 Events
+Laminas Events
 ==========
 
 This module has no events or listeners.
 
-ZF2 Services
+Laminas Services
 ============
 
 ### View Helpers
@@ -150,24 +150,24 @@ ZF2 Services
 The following list of view helpers assist in making API documentation models presentable in view
 scripts.
 
-- `ZF\Apigility\Documentation\View\AgAcceptHeaders` (a.k.a `agAcceptHeaders`) for making a
+- `Laminas\ApiTools\Documentation\View\AgAcceptHeaders` (a.k.a `agAcceptHeaders`) for making a
   list of `Accept` headers, escaped for HTML.
-- `ZF\Apigility\Documentation\View\AgContentTypeHeaders`  (a.k.a `agContentTypeHeaders`) for
+- `Laminas\ApiTools\Documentation\View\AgContentTypeHeaders`  (a.k.a `agContentTypeHeaders`) for
   making a list of `Content-Type` headers, escaped for HTML.
-- `ZF\Apigility\Documentation\View\AgServicePath` (a.k.a `agServicePath`) for making an HTML
+- `Laminas\ApiTools\Documentation\View\AgServicePath` (a.k.a `agServicePath`) for making an HTML
   view representation of the route configuration of a service path.
-- `ZF\Apigility\Documentation\View\AgStatusCodes` (a.k.a `agStatusCodes`) for making an
+- `Laminas\ApiTools\Documentation\View\AgStatusCodes` (a.k.a `agStatusCodes`) for making an
   escaped list of status codes and their messages.
 
 ### Factories
 
-#### `ZF\Apigility\Documentation\ApiFactory`
+#### `Laminas\ApiTools\Documentation\ApiFactory`
 
 The `ApiFactory` service is capable of producing an object-graph representation of the desired
 API documentation that is requested.  This object-graph will be composed of the following types:
 
-- `ZF\Apigility\Documentation\Api`: the root node of an API.
-- `ZF\Apigility\Documentation\Services`: an array of services in the API (a service can be one
+- `Laminas\ApiTools\Documentation\Api`: the root node of an API.
+- `Laminas\ApiTools\Documentation\Services`: an array of services in the API (a service can be one
   of a REST or RPC style service).
-- `ZF\Apigility\Documentation\Operations`: an array of operations in the service.
-- `ZF\Apigility\Documentation\Fields`: an array of fields for a service.
+- `Laminas\ApiTools\Documentation\Operations`: an array of operations in the service.
+- `Laminas\ApiTools\Documentation\Fields`: an array of fields for a service.
