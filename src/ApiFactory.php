@@ -1,16 +1,18 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Apigility\Documentation;
+namespace Laminas\ApiTools\Documentation;
 
-use Zend\ModuleManager\ModuleManager;
-use Zend\InputFilter\CollectionInputFilter;
-use Zend\InputFilter\InputFilterInterface;
-use ZF\Apigility\Provider\ApigilityProviderInterface;
-use ZF\Configuration\ModuleUtils as ConfigModuleUtils;
+use Laminas\ApiTools\Configuration\ModuleUtils as ConfigModuleUtils;
+use Laminas\ApiTools\Provider\ApiToolsProviderInterface;
+use Laminas\InputFilter\CollectionInputFilter;
+use Laminas\InputFilter\InputFilterInterface;
+use Laminas\ModuleManager\ModuleManager;
 
 class ApiFactory
 {
@@ -53,19 +55,19 @@ class ApiFactory
      */
     public function createApiList()
     {
-        $apigilityModules = [];
+        $apiToolsModules = [];
         $q = preg_quote('\\');
         foreach ($this->moduleManager->getModules() as $moduleName) {
             $module = $this->moduleManager->getModule($moduleName);
-            if ($module instanceof ApigilityProviderInterface) {
+            if ($module instanceof ApiToolsProviderInterface) {
                 $versionRegex = '#' . preg_quote($moduleName) . $q . 'V(?P<version>[^' . $q . ']+)' . $q . '#';
                 $versions = [];
                 $serviceConfigs = [];
-                if ($this->config['zf-rest']) {
-                    $serviceConfigs = array_merge($serviceConfigs, $this->config['zf-rest']);
+                if ($this->config['api-tools-rest']) {
+                    $serviceConfigs = array_merge($serviceConfigs, $this->config['api-tools-rest']);
                 }
-                if ($this->config['zf-rpc']) {
-                    $serviceConfigs = array_merge($serviceConfigs, $this->config['zf-rpc']);
+                if ($this->config['api-tools-rpc']) {
+                    $serviceConfigs = array_merge($serviceConfigs, $this->config['api-tools-rpc']);
                 }
 
                 foreach ($serviceConfigs as $serviceName => $serviceConfig) {
@@ -78,13 +80,13 @@ class ApiFactory
                     }
                 }
 
-                $apigilityModules[] = [
+                $apiToolsModules[] = [
                     'name'     => $moduleName,
                     'versions' => $versions,
                 ];
             }
         }
-        return $apigilityModules;
+        return $apiToolsModules;
     }
 
     /**
@@ -102,11 +104,11 @@ class ApiFactory
         $api->setName($apiName);
 
         $serviceConfigs = [];
-        if ($this->config['zf-rest']) {
-            $serviceConfigs = array_merge($serviceConfigs, $this->config['zf-rest']);
+        if ($this->config['api-tools-rest']) {
+            $serviceConfigs = array_merge($serviceConfigs, $this->config['api-tools-rest']);
         }
-        if ($this->config['zf-rpc']) {
-            $serviceConfigs = array_merge($serviceConfigs, $this->config['zf-rpc']);
+        if ($this->config['api-tools-rpc']) {
+            $serviceConfigs = array_merge($serviceConfigs, $this->config['api-tools-rpc']);
         }
 
         // Sort services by name
@@ -146,7 +148,7 @@ class ApiFactory
         $hasSegments = false;
         $hasFields   = false;
 
-        foreach ($this->config['zf-rest'] as $serviceClassName => $restConfig) {
+        foreach ($this->config['api-tools-rest'] as $serviceClassName => $restConfig) {
             if ((strpos($serviceClassName, $api->getName() . '\\') === 0)
                 && isset($restConfig['service_name'])
                 && ($restConfig['service_name'] === $serviceName)
@@ -160,7 +162,7 @@ class ApiFactory
         }
 
         if (!$serviceData) {
-            foreach ($this->config['zf-rpc'] as $serviceClassName => $rpcConfig) {
+            foreach ($this->config['api-tools-rpc'] as $serviceClassName => $rpcConfig) {
                 if ((strpos($serviceClassName, $api->getName() . '\\') === 0)
                     && isset($rpcConfig['service_name'])
                     && ($rpcConfig['service_name'] === $serviceName)
@@ -202,8 +204,8 @@ class ApiFactory
         }
 
         $fields = [];
-        if (isset($this->config['zf-content-validation'][$serviceClassName])) {
-            foreach ($this->config['zf-content-validation'][$serviceClassName] as $validatorKey => $validatorName) {
+        if (isset($this->config['api-tools-content-validation'][$serviceClassName])) {
+            foreach ($this->config['api-tools-content-validation'][$serviceClassName] as $validatorKey => $validatorName) {
                 foreach ($this->mapFields($this->config['input_filter_specs'][$validatorName]) as $fieldData) {
                     $fields[$validatorKey][] = $this->getField($fieldData);
                 }
@@ -322,15 +324,15 @@ class ApiFactory
             $service->setEntityOperations($ops);
         }
 
-        if (isset($this->config['zf-content-negotiation']['accept_whitelist'][$serviceClassName])) {
+        if (isset($this->config['api-tools-content-negotiation']['accept_whitelist'][$serviceClassName])) {
             $service->setRequestAcceptTypes(
-                $this->config['zf-content-negotiation']['accept_whitelist'][$serviceClassName]
+                $this->config['api-tools-content-negotiation']['accept_whitelist'][$serviceClassName]
             );
         }
 
-        if (isset($this->config['zf-content-negotiation']['content_type_whitelist'][$serviceClassName])) {
+        if (isset($this->config['api-tools-content-negotiation']['content_type_whitelist'][$serviceClassName])) {
             $service->setRequestContentTypes(
-                $this->config['zf-content-negotiation']['content_type_whitelist'][$serviceClassName]
+                $this->config['api-tools-content-negotiation']['content_type_whitelist'][$serviceClassName]
             );
         }
 
@@ -443,10 +445,10 @@ class ApiFactory
      */
     protected function getAuthorizations($serviceName)
     {
-        if (! isset($this->config['zf-mvc-auth']['authorization'][$serviceName])) {
+        if (! isset($this->config['api-tools-mvc-auth']['authorization'][$serviceName])) {
             return [];
         }
-        return $this->config['zf-mvc-auth']['authorization'][$serviceName];
+        return $this->config['api-tools-mvc-auth']['authorization'][$serviceName];
     }
 
     /**

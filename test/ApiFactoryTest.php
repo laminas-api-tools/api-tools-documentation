@@ -1,16 +1,18 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Apigility\Documentation;
+namespace LaminasTest\ApiTools\Documentation;
 
+use Laminas\ApiTools\Configuration\ModuleUtils;
+use Laminas\ApiTools\Documentation\ApiFactory;
+use Laminas\ApiTools\Provider\ApiToolsProviderInterface;
+use Laminas\ModuleManager\ModuleManager;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\ModuleManager\ModuleManager;
-use ZF\Apigility\Documentation\ApiFactory;
-use ZF\Apigility\Provider\ApigilityProviderInterface;
-use ZF\Configuration\ModuleUtils;
 
 class ApiFactoryTest extends TestCase
 {
@@ -64,7 +66,7 @@ class ApiFactoryTest extends TestCase
 
     public function setup()
     {
-        $mockModule = $this->prophesize(ApigilityProviderInterface::class)->reveal();
+        $mockModule = $this->prophesize(ApiToolsProviderInterface::class)->reveal();
 
         $moduleManager = $this->prophesize(ModuleManager::class);
         $moduleManager->getModules()->willReturn(['Test']);
@@ -138,7 +140,7 @@ class ApiFactoryTest extends TestCase
     public function testCreateApi()
     {
         $api = $this->apiFactory->createApi('Test', 1);
-        $this->assertInstanceOf('ZF\Apigility\Documentation\Api', $api);
+        $this->assertInstanceOf('Laminas\ApiTools\Documentation\Api', $api);
 
         $this->assertEquals('Test', $api->getName());
         $this->assertEquals(1, $api->getVersion());
@@ -151,14 +153,14 @@ class ApiFactoryTest extends TestCase
         $api = $this->apiFactory->createApi('Test', 1);
 
         $service = $this->apiFactory->createService($api, 'FooBar');
-        $this->assertInstanceOf('ZF\Apigility\Documentation\Service', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\Documentation\Service', $service);
 
         $this->assertEquals('FooBar', $service->getName());
         $this->assertEquals($docConfig['Test\V1\Rest\FooBar\Controller']['description'], $service->getDescription());
 
         $fields = $service->getFields('input_filter');
         $this->assertCount(5, $fields);
-        $this->assertInstanceOf('ZF\Apigility\Documentation\Field', $fields[0]);
+        $this->assertInstanceOf('Laminas\ApiTools\Documentation\Field', $fields[0]);
         $this->assertEquals('foogoober/subgoober', $fields[2]->getName());
         $this->assertEquals('foofoogoober/subgoober/subgoober', $fields[3]->getName());
 
@@ -166,7 +168,7 @@ class ApiFactoryTest extends TestCase
         $this->assertCount(2, $ops);
 
         foreach ($ops as $operation) {
-            $this->assertInstanceOf('ZF\Apigility\Documentation\Operation', $operation);
+            $this->assertInstanceOf('Laminas\ApiTools\Documentation\Operation', $operation);
             $statusCodes = $operation->getResponseStatusCodes();
             switch ($operation->getHttpMethod()) {
                 case 'GET':
@@ -190,7 +192,7 @@ class ApiFactoryTest extends TestCase
         $this->assertCount(4, $eOps);
 
         foreach ($eOps as $operation) {
-            $this->assertInstanceOf('ZF\Apigility\Documentation\Operation', $operation);
+            $this->assertInstanceOf('Laminas\ApiTools\Documentation\Operation', $operation);
             $statusCodes = $operation->getResponseStatusCodes();
             switch ($operation->getHttpMethod()) {
                 case 'GET':
@@ -222,7 +224,7 @@ class ApiFactoryTest extends TestCase
         $api = $this->apiFactory->createApi('Test', 1);
 
         $service = $this->apiFactory->createService($api, 'FooBarCollection');
-        $this->assertInstanceOf('ZF\Apigility\Documentation\Service', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\Documentation\Service', $service);
 
         $this->assertEquals('FooBarCollection', $service->getName());
         $this->assertEquals(
@@ -243,7 +245,7 @@ class ApiFactoryTest extends TestCase
         $api = $this->apiFactory->createApi('Test', 1);
 
         $service = $this->apiFactory->createService($api, 'Ping');
-        $this->assertInstanceOf('ZF\Apigility\Documentation\Service', $service);
+        $this->assertInstanceOf('Laminas\ApiTools\Documentation\Service', $service);
 
         $this->assertEquals('Ping', $service->getName());
         $this->assertEquals($docConfig['Test\V1\Rpc\Ping\Controller']['description'], $service->getDescription());
@@ -252,7 +254,7 @@ class ApiFactoryTest extends TestCase
         $this->assertCount(1, $ops);
 
         foreach ($ops as $operation) {
-            $this->assertInstanceOf('ZF\Apigility\Documentation\Operation', $operation);
+            $this->assertInstanceOf('Laminas\ApiTools\Documentation\Operation', $operation);
             $statusCodes = $operation->getResponseStatusCodes();
             switch ($operation->getHttpMethod()) {
                 case 'GET':
