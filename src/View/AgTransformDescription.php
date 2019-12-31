@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Apigility\Documentation\View;
+namespace Laminas\ApiTools\Documentation\View;
 
 use \Michelf\MarkdownExtra;
-
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
- * View helper used to transform a raw Apigility description into a specific format (only Markdown is currently
+ * View helper used to transform a raw Laminas API Tools description into a specific format (only Markdown is currently
  * supported).
  *
  * @see https://github.com/michelf/php-markdown
@@ -19,9 +20,9 @@ use Zend\View\Helper\AbstractHelper;
 class AgTransformDescription extends AbstractHelper
 {
     /**
-     * Transform an Apigility raw description into a specific format (only Markdown is currently supported).
+     * Transform an Laminas API Tools raw description into a specific format (only Markdown is currently supported).
      *
-     * @param  string $string The raw Apigility description.
+     * @param  string $string The raw Laminas API Tools description.
      * @return string The resulting transformed description.
      */
     public function __invoke($description)

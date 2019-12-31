@@ -1,14 +1,16 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Apigility\Documentation\Factory;
+namespace Laminas\ApiTools\Documentation\Factory;
 
 use Interop\Container\ContainerInterface;
-use ZF\Apigility\Documentation\ApiFactory;
-use ZF\Configuration\ModuleUtils;
+use Laminas\ApiTools\Configuration\ModuleUtils;
+use Laminas\ApiTools\Documentation\ApiFactory;
 
 class ApiFactoryFactory
 {
