@@ -1,8 +1,8 @@
 <?php
 
-namespace ZF\Apigility\Documentation;
+namespace Laminas\ApiTools\Documentation;
 
-use Zend\View\Model\JsonModel as BaseJsonModel;
+use Laminas\View\Model\JsonModel as BaseJsonModel;
 
 class JsonModel extends BaseJsonModel
 {

@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Apigility\Documentation;
+namespace Laminas\ApiTools\Documentation;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class ControllerFactory implements FactoryInterface
 {
@@ -15,7 +17,7 @@ class ControllerFactory implements FactoryInterface
     {
         $services = $controllers->getServiceLocator();
         return new Controller(
-            $services->get('ZF\Apigility\Documentation\ApiFactory'),
+            $services->get('Laminas\ApiTools\Documentation\ApiFactory'),
             $services->get('ViewHelperManager')->get('ServerUrl')
         );
     }

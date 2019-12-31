@@ -1,10 +1,10 @@
-Apigility Documentation Models
+Laminas API Tools Documentation Models
 ==============================
 
-[![Build Status](https://travis-ci.org/zfcampus/zf-apigility-documentation.png)](https://travis-ci.org/zfcampus/zf-apigility-documentation)
-[![Coverage Status](https://coveralls.io/repos/zfcampus/zf-apigility-documentation/badge.png?branch=master)](https://coveralls.io/r/zfcampus/zf-apigility-documentation)
+[![Build Status](https://travis-ci.org/laminas-api-tools/api-tools-documentation.png)](https://travis-ci.org/laminas-api-tools/api-tools-documentation)
+[![Coverage Status](https://coveralls.io/repos/laminas-api-tools/api-tools-documentation/badge.png?branch=master)](https://coveralls.io/r/laminas-api-tools/api-tools-documentation)
 
-This ZF2 module can be used with conjunction with Apigility in order to:
+This Laminas module can be used with conjunction with Laminas API Tools in order to:
 
 - provide an object model of all captured documentation information, including:
   - All APIs available
