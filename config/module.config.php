@@ -1,23 +1,25 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
 return array(
     'router' => array(
         'routes' => array(
-            'zf-apigility' => array(
+            'api-tools' => array(
                 'child_routes' => array(
                     'documentation' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'type' => 'Laminas\Mvc\Router\Http\Segment',
                         'options' => array(
                             'route'    => '/documentation[/:api[-v:version][/:service]]',
                             'constraints' => array(
                                 'api' => '[a-zA-Z][a-zA-Z0-9_]+',
                             ),
                             'defaults' => array(
-                                'controller' => 'ZF\Apigility\Documentation\Controller',
+                                'controller' => 'Laminas\ApiTools\Documentation\Controller',
                                 'action'     => 'show',
                             ),
                         ),
@@ -28,25 +30,25 @@ return array(
     ),
     'controllers' => array(
         'factories' => array(
-            'ZF\Apigility\Documentation\Controller' => 'ZF\Apigility\Documentation\ControllerFactory',
+            'Laminas\ApiTools\Documentation\Controller' => 'Laminas\ApiTools\Documentation\ControllerFactory',
         ),
     ),
-    'zf-content-negotiation' => array(
+    'api-tools-content-negotiation' => array(
         'controllers' => array(
-            'ZF\Apigility\Documentation\Controller' => 'Documentation',
+            'Laminas\ApiTools\Documentation\Controller' => 'Documentation',
         ),
         'accept_whitelist' => array(
-            'ZF\Apigility\Documentation\Controller' => array(
+            'Laminas\ApiTools\Documentation\Controller' => array(
                 0 => 'application/vnd.swagger+json',
                 1 => 'application/json',
             ),
         ),
         'selectors' => array(
             'Documentation' => array(
-                'ZF\Apigility\Documentation\JsonModel' => array(
+                'Laminas\ApiTools\Documentation\JsonModel' => array(
                     'application/json',
                 ),
-                'Zend\View\Model\ViewModel' => array(
+                'Laminas\View\Model\ViewModel' => array(
                     'text/html',
                     'application/xhtml+xml',
                 ),
@@ -55,10 +57,10 @@ return array(
     ),
     'view_helpers' => array(
         'invokables' => array(
-            'agacceptheaders'      => 'ZF\Apigility\Documentation\View\AgAcceptHeaders',
-            'agcontenttypeheaders' => 'ZF\Apigility\Documentation\View\AgContentTypeHeaders',
-            'agservicepath'        => 'ZF\Apigility\Documentation\View\AgServicePath',
-            'agstatuscodes'        => 'ZF\Apigility\Documentation\View\AgStatusCodes',
+            'agacceptheaders'      => 'Laminas\ApiTools\Documentation\View\AgAcceptHeaders',
+            'agcontenttypeheaders' => 'Laminas\ApiTools\Documentation\View\AgContentTypeHeaders',
+            'agservicepath'        => 'Laminas\ApiTools\Documentation\View\AgServicePath',
+            'agstatuscodes'        => 'Laminas\ApiTools\Documentation\View\AgStatusCodes',
         ),
     ),
     'view_manager' => array(
