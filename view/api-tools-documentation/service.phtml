@@ -19,7 +19,7 @@ $serviceCollapseId = $this->escapeHtmlAttr(sprintf('docs-collapse-%s', $service-
         </div>
 
         <?php foreach ($service->getOperations() as $operation) {
-            echo $this->render('zf-apigility-documentation/operation', array(
+            echo $this->render('api-tools-documentation/operation', array(
                 'operation' => $operation,
                 'service'   => $service,
                 'isEntity'  => false,
@@ -28,7 +28,7 @@ $serviceCollapseId = $this->escapeHtmlAttr(sprintf('docs-collapse-%s', $service-
 
         <?php if ($entityOperations) {
             foreach ($entityOperations as $j => $operation) {
-                echo $this->render('zf-apigility-documentation/operation', array(
+                echo $this->render('api-tools-documentation/operation', array(
                     'operation' => $operation,
                     'service'   => $service,
                     'isEntity'  => true,
