@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Apigility\Documentation\View;
+namespace Laminas\ApiTools\Documentation\View;
 
-use Zend\View\Helper\AbstractHelper;
-use ZF\Apigility\Documentation\Service;
+use Laminas\ApiTools\Documentation\Service;
+use Laminas\View\Helper\AbstractHelper;
 
 class AgAcceptHeaders extends AbstractHelper
 {

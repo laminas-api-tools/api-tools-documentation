@@ -1,14 +1,14 @@
 <?php
 
-namespace ZFTest\Apigility\Documentation;
+namespace LaminasTest\ApiTools\Documentation;
 
+use Laminas\ApiTools\Documentation\ApiFactory;
+use Laminas\ApiTools\Documentation\Controller;
+use Laminas\Mvc\MvcEvent;
+use Laminas\View\Helper\BasePath;
+use Laminas\View\Helper\ServerUrl;
+use Laminas\View\Model\ModelInterface;
 use PHPUnit\Framework\TestCase;
-use Zend\Mvc\MvcEvent;
-use Zend\View\Helper\BasePath;
-use Zend\View\Helper\ServerUrl;
-use Zend\View\Model\ModelInterface;
-use ZF\Apigility\Documentation\ApiFactory;
-use ZF\Apigility\Documentation\Controller;
 
 class ControllerTest extends TestCase
 {
@@ -40,10 +40,10 @@ class ControllerTest extends TestCase
 
         $this->event = new MvcEvent();
 
-        if (class_exists('Zend\Router\RouteMatch', true)) {
-            $this->event->setRouteMatch(new \Zend\Router\RouteMatch([]));
-        } elseif (class_exists('Zend\Mvc\Router\RouteMatch', true)) {
-            $this->event->setRouteMatch(new \Zend\Mvc\Router\RouteMatch([]));
+        if (class_exists('Laminas\Router\RouteMatch', true)) {
+            $this->event->setRouteMatch(new \Laminas\Router\RouteMatch([]));
+        } elseif (class_exists('Laminas\Mvc\Router\RouteMatch', true)) {
+            $this->event->setRouteMatch(new \Laminas\Mvc\Router\RouteMatch([]));
         }
     }
 
