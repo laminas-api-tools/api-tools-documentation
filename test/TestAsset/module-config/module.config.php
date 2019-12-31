@@ -1,7 +1,9 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
 return array(
@@ -66,7 +68,7 @@ return array(
             ),
         ),
     ),
-    'zf-versioning' => array(
+    'api-tools-versioning' => array(
         'uri' => array(
             0 => 'test.rest.foo-bar',
             1 => 'test.rest.boo-baz',
@@ -82,7 +84,7 @@ return array(
             'Test\\V1\\Rest\\BooBaz\\BooBazResource' => 'Test\\V1\\Rest\\BooBaz\\BooBazResource',
         ),
     ),
-    'zf-rest' => array(
+    'api-tools-rest' => array(
         'Test\\V1\\Rest\\FooBar\\Controller' => array(
             'listener' => 'Test\\V1\\Rest\\FooBar\\FooBarResource',
             'route_name' => 'test.rest.foo-bar',
@@ -167,7 +169,7 @@ return array(
             'service_name' => 'EntityFields',
         ),
     ),
-    'zf-content-negotiation' => array(
+    'api-tools-content-negotiation' => array(
         'controllers' => array(
             'Test\\V1\\Rest\\FooBar\\Controller' => 'HalJson',
             'Test\\V1\\Rest\\FooBarCollection\\Controller' => 'HalJson',
@@ -234,13 +236,13 @@ return array(
             ),
         ),
     ),
-    'zf-hal' => array(
+    'api-tools-hal' => array(
         'metadata_map' => array(
             'Test\\V1\\Rest\\FooBar\\FooBarEntity' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'test.rest.foo-bar',
                 'route_identifier_name' => 'foo_bar_id',
-                'hydrator' => 'Zend\\Stdlib\\Hydrator\\ArraySerializable',
+                'hydrator' => 'Laminas\\Stdlib\\Hydrator\\ArraySerializable',
             ),
             'Test\\V1\\Rest\\FooBar\\FooBarCollection' => array(
                 'entity_identifier_name' => 'id',
@@ -252,7 +254,7 @@ return array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'test.rest.boo-baz',
                 'route_identifier_name' => 'boo_baz_id',
-                'hydrator' => 'Zend\\Stdlib\\Hydrator\\ArraySerializable',
+                'hydrator' => 'Laminas\\Stdlib\\Hydrator\\ArraySerializable',
             ),
             'Test\\V1\\Rest\\BooBaz\\BooBazCollection' => array(
                 'entity_identifier_name' => 'id',
@@ -274,7 +276,7 @@ return array(
             'Test\\V1\\Rpc\\Ping\\Controller' => 'Test\\V1\\Rpc\\Ping\\PingController',
         ),
     ),
-    'zf-rpc' => array(
+    'api-tools-rpc' => array(
         'Test\\V1\\Rpc\\MyRpc\\Controller' => array(
             'service_name' => 'MyRpc',
             'http_methods' => array(
@@ -290,7 +292,7 @@ return array(
             'route_name' => 'test.rpc.ping',
         ),
     ),
-    'zf-content-validation' => array(
+    'api-tools-content-validation' => array(
         'Test\\V1\\Rest\\FooBar\\Controller' => array(
             'input_filter' => 'Test\\V1\\Rest\\FooBar\\Validator',
         ),
@@ -318,7 +320,7 @@ return array(
                 'validators' => array(),
             ),
             'foogoober' => array(
-                'type' => 'Zend\InputFilter\InputFilter',
+                'type' => 'Laminas\InputFilter\InputFilter',
                 'subgoober' => array(
                     'name' => 'subgoober',
                     'required' => true,
@@ -327,9 +329,9 @@ return array(
                 )
             ),
             'foofoogoober' => array(
-                'type' => 'Zend\InputFilter\InputFilter',
+                'type' => 'Laminas\InputFilter\InputFilter',
                 'subgoober' => array(
-                    'type' => 'Zend\InputFilter\InputFilter',
+                    'type' => 'Laminas\InputFilter\InputFilter',
                     'subgoober' => array(
                         'name' => 'subgoober',
                         'required' => true,
@@ -339,7 +341,7 @@ return array(
                 )
             ),
             'companyDetails' => array(
-                'type' => 'Zend\\InputFilter\\InputFilter',
+                'type' => 'Laminas\\InputFilter\\InputFilter',
                 'name' => array(
                     'name' => 'name',
                     'required' => true,
@@ -365,11 +367,11 @@ return array(
         ),
         'Test\\V1\\Rest\\FooBarCollection\\Validator' => array(
             'FooBarCollection' => array(
-                'type' => Zend\InputFilter\CollectionInputFilter::class,
+                'type' => Laminas\InputFilter\CollectionInputFilter::class,
                 'required' => true,
                 'count' => 1,
                 'input_filter' => array(
-                    'type' => Zend\InputFilter\InputFilter::class,
+                    'type' => Laminas\InputFilter\InputFilter::class,
                     'name' => 'FooBar',
                     'required' => true,
                     'filters' => array(),
@@ -377,11 +379,11 @@ return array(
                 ),
             ),
             'AnotherCollection' => array(
-                'type' => 'Zend\\InputFilter\\CollectionInputFilter',
+                'type' => 'Laminas\\InputFilter\\CollectionInputFilter',
                 'required' => true,
                 'count' => 1,
                 'input_filter' => array(
-                    'type' => Zend\InputFilter\InputFilter::class,
+                    'type' => Laminas\InputFilter\InputFilter::class,
                     'name' => 'FooBar',
                     'required' => true,
                     'filters' => array(),
@@ -408,7 +410,7 @@ return array(
             ),
         ),
     ),
-    'zf-mvc-auth' => array(
+    'api-tools-mvc-auth' => array(
         'authentication' => array(
             'http' => array(
                 'realm' => 'api',
