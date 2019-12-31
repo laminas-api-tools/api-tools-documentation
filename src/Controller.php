@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Apigility\Documentation;
+namespace Laminas\ApiTools\Documentation;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Helper\BasePath;
-use Zend\View\Helper\ServerUrl;
-use ZF\ContentNegotiation\ViewModel;
+use Laminas\ApiTools\ContentNegotiation\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Helper\BasePath;
+use Laminas\View\Helper\ServerUrl;
 
 class Controller extends AbstractActionController
 {
@@ -57,7 +59,7 @@ class Controller extends AbstractActionController
         $serviceName = $this->params()->fromRoute('service');
 
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('zf-apigility-documentation/show');
+        $viewModel->setTemplate('api-tools-documentation/show');
         $viewModel->setVariable('baseUrl', $this->serverUrlViewHelper->__invoke($basePath));
 
         if (! $apiName) {

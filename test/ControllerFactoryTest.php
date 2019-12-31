@@ -1,14 +1,14 @@
 <?php
 
-namespace ZFTest\Apigility\Documentation;
+namespace LaminasTest\ApiTools\Documentation;
 
+use Laminas\ApiTools\Documentation\ApiFactory;
+use Laminas\ApiTools\Documentation\Controller;
+use Laminas\ApiTools\Documentation\ControllerFactory;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\View\Helper\BasePath;
+use Laminas\View\Helper\ServerUrl;
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceManager;
-use Zend\View\Helper\BasePath;
-use Zend\View\Helper\ServerUrl;
-use ZF\Apigility\Documentation\ApiFactory;
-use ZF\Apigility\Documentation\Controller;
-use ZF\Apigility\Documentation\ControllerFactory;
 
 class ControllerFactoryTest extends TestCase
 {
