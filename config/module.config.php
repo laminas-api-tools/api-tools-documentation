@@ -1,18 +1,20 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Apigility\Documentation;
+namespace Laminas\ApiTools\Documentation;
 
-use Zend\ServiceManager\Factory\InvokableFactory;
-use Zend\View\Modle\ViewModel;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\View\Modle\ViewModel;
 
 return [
     'router' => [
         'routes' => [
-            'zf-apigility' => [
+            'api-tools' => [
                 'child_routes' => [
                     'documentation' => [
                         'type' => 'segment',
@@ -32,16 +34,24 @@ return [
         ],
     ],
     'service_manager' => [
+        // Legacy Zend Framework aliases
+        'aliases' => [
+            \ZF\Apigility\Documentation\ApiFactory::class => ApiFactory::class,
+        ],
         'factories' => [
             ApiFactory::class => Factory\ApiFactoryFactory::class,
         ],
     ],
     'controllers' => [
+        // Legacy Zend Framework aliases
+        'aliases' => [
+            \ZF\Apigility\Documentation\Controller::class => Controller::class,
+        ],
         'factories' => [
             Controller::class => ControllerFactory::class,
         ],
     ],
-    'zf-content-negotiation' => [
+    'api-tools-content-negotiation' => [
         'controllers' => [
             Controller::class => 'Documentation',
         ],
@@ -75,6 +85,13 @@ return [
             'agStatusCodes'           => View\AgStatusCodes::class,
             'agtransformdescription'  => View\AgTransformDescription::class,
             'agTransformDescription'  => View\AgTransformDescription::class,
+
+            // Legacy Zend Framework aliases
+            \ZF\Apigility\Documentation\View\AgAcceptHeaders::class => View\AgAcceptHeaders::class,
+            \ZF\Apigility\Documentation\View\AgContentTypeHeaders::class => View\AgContentTypeHeaders::class,
+            \ZF\Apigility\Documentation\View\AgServicePath::class => View\AgServicePath::class,
+            \ZF\Apigility\Documentation\View\AgStatusCodes::class => View\AgStatusCodes::class,
+            \ZF\Apigility\Documentation\View\AgTransformDescription::class => View\AgTransformDescription::class,
         ],
         'factories' => [
             View\AgAcceptHeaders::class        => InvokableFactory::class,
