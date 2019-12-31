@@ -1,7 +1,7 @@
-Apigility Documentation Models
+Laminas API Tools Documentation Models
 ==============================
 
-This ZF2 module can be used with conjunction with Apigility in order to:
+This Laminas module can be used with conjunction with Laminas API Tools in order to:
 
 - provide an object model of all captured documentation information, including:
   - All APIs available
