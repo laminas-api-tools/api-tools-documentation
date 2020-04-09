@@ -205,7 +205,8 @@ class ApiFactory
 
         $fields = [];
         if (isset($this->config['api-tools-content-validation'][$serviceClassName])) {
-            foreach ($this->config['api-tools-content-validation'][$serviceClassName] as $validatorKey => $validatorName) {
+            $validators = $this->config['api-tools-content-validation'][$serviceClassName];
+            foreach ($validators as $validatorKey => $validatorName) {
                 if (isset($this->config['input_filter_specs'][$validatorName])) {
                     foreach ($this->mapFields($this->config['input_filter_specs'][$validatorName]) as $fieldData) {
                         $fields[$validatorKey][] = $this->getField($fieldData);
