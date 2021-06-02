@@ -4,7 +4,7 @@ namespace Laminas\ApiTools\Documentation;
 
 class Module
 {
-    /** @return array */
+    /** @return array<string, mixed> */
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';

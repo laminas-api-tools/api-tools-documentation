@@ -461,7 +461,7 @@ class ApiFactory
 
     protected function hasOptionalSegments(string $route): bool
     {
-        return preg_match('#\[.*?:.+\]#', $route);
+        return (bool) preg_match('#\[.*?:.+\]#', $route);
     }
 
     /** @psalm-return array{code:string, message:string} */
