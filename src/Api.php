@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use ArrayIterator;
@@ -15,24 +9,16 @@ use IteratorAggregate;
 
 class Api implements IteratorAggregate
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var int|string
-     */
+    /** @var int|string */
     protected $version = 1;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $authorization;
 
-    /**
-     * @var Service[]
-     */
+    /** @var Service[] */
     protected $services = [];
 
     /**
@@ -83,9 +69,6 @@ class Api implements IteratorAggregate
         return $this->authorization;
     }
 
-    /**
-     * @param Service $service
-     */
     public function addService(Service $service)
     {
         $this->services[] = $service;
@@ -109,7 +92,7 @@ class Api implements IteratorAggregate
         $array = [
             'name'     => $this->name,
             'version'  => $this->version,
-            'services' => []
+            'services' => [],
         ];
         foreach ($this->services as $i => $service) {
             $array['services'][$i] = $service->toArray();

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use Laminas\ApiTools\Configuration\ModuleUtils as ConfigModuleUtils;
@@ -14,37 +8,43 @@ use Laminas\InputFilter\CollectionInputFilter;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\ModuleManager\ModuleManager;
 
+use function array_diff_key;
+use function array_merge;
+use function array_push;
+use function dirname;
+use function file_exists;
+use function in_array;
+use function is_array;
+use function is_subclass_of;
+use function ksort;
+use function preg_match;
+use function preg_quote;
+use function sprintf;
+use function str_replace;
+use function strpos;
+use function strstr;
+
 class ApiFactory
 {
-    /**
-     * @var ModuleManager
-     */
+    /** @var ModuleManager */
     protected $moduleManager;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $config;
 
-    /**
-     * @var ConfigModuleUtils
-     */
+    /** @var ConfigModuleUtils */
     protected $configModuleUtils;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $docs = [];
 
     /**
-     * @param ModuleManager $moduleManager
      * @param array $config
-     * @param ConfigModuleUtils $configModuleUtils
      */
     public function __construct(ModuleManager $moduleManager, $config, ConfigModuleUtils $configModuleUtils)
     {
-        $this->moduleManager = $moduleManager;
-        $this->config = $config;
+        $this->moduleManager     = $moduleManager;
+        $this->config            = $config;
         $this->configModuleUtils = $configModuleUtils;
     }
 
@@ -56,12 +56,12 @@ class ApiFactory
     public function createApiList()
     {
         $apiToolsModules = [];
-        $q = preg_quote('\\');
+        $q               = preg_quote('\\');
         foreach ($this->moduleManager->getModules() as $moduleName) {
             $module = $this->moduleManager->getModule($moduleName);
             if ($module instanceof ApiToolsProviderInterface) {
-                $versionRegex = '#' . preg_quote($moduleName) . $q . 'V(?P<version>[^' . $q . ']+)' . $q . '#';
-                $versions = [];
+                $versionRegex   = '#' . preg_quote($moduleName) . $q . 'V(?P<version>[^' . $q . ']+)' . $q . '#';
+                $versions       = [];
                 $serviceConfigs = [];
                 if ($this->config['api-tools-rest']) {
                     $serviceConfigs = array_merge($serviceConfigs, $this->config['api-tools-rest']);
@@ -98,7 +98,7 @@ class ApiFactory
      */
     public function createApi($apiName, $apiVersion = 1)
     {
-        $api = new Api;
+        $api = new Api();
 
         $api->setVersion($apiVersion);
         $api->setName($apiName);
@@ -115,7 +115,8 @@ class ApiFactory
         ksort($serviceConfigs);
 
         foreach ($serviceConfigs as $serviceName => $serviceConfig) {
-            if (strpos($serviceName, $apiName . '\\') === 0
+            if (
+                strpos($serviceName, $apiName . '\\') === 0
                 && strpos($serviceName, '\V' . $api->getVersion() . '\\')
                 && isset($serviceConfig['service_name'])
             ) {
@@ -133,7 +134,6 @@ class ApiFactory
      * Create documentation details for a given service in a given version of
      * an API module
      *
-     * @param Api $api
      * @param string $serviceName
      * @return Service
      */
@@ -149,13 +149,14 @@ class ApiFactory
         $hasFields   = false;
 
         foreach ($this->config['api-tools-rest'] as $serviceClassName => $restConfig) {
-            if ((strpos($serviceClassName, $api->getName() . '\\') === 0)
+            if (
+                (strpos($serviceClassName, $api->getName() . '\\') === 0)
                 && isset($restConfig['service_name'])
                 && ($restConfig['service_name'] === $serviceName)
                 && (strstr($serviceClassName, '\\V' . $api->getVersion() . '\\') !== false)
             ) {
                 $serviceData = $restConfig;
-                $isRest = true;
+                $isRest      = true;
                 $hasSegments = true;
                 break;
             }
@@ -163,18 +164,19 @@ class ApiFactory
 
         if (! $serviceData) {
             foreach ($this->config['api-tools-rpc'] as $serviceClassName => $rpcConfig) {
-                if ((strpos($serviceClassName, $api->getName() . '\\') === 0)
+                if (
+                    (strpos($serviceClassName, $api->getName() . '\\') === 0)
                     && isset($rpcConfig['service_name'])
                     && ($rpcConfig['service_name'] === $serviceName)
                     && (strstr($serviceClassName, '\\V' . $api->getVersion() . '\\') !== false)
                 ) {
-                    $serviceData = $rpcConfig;
+                    $serviceData           = $rpcConfig;
                     $serviceData['action'] = $this->marshalActionFromRouteConfig(
                         $serviceName,
                         $serviceClassName,
                         $rpcConfig
                     );
-                    $isRpc = true;
+                    $isRpc                 = true;
                     break;
                 }
             }
@@ -216,9 +218,7 @@ class ApiFactory
             }
         }
 
-        $baseOperationData = (isset($serviceData['collection_http_methods']))
-            ? $serviceData['collection_http_methods']
-            : $serviceData['http_methods'];
+        $baseOperationData = $serviceData['collection_http_methods'] ?? $serviceData['http_methods'];
 
         $ops = [];
         foreach ($baseOperationData as $httpMethod) {
@@ -226,25 +226,17 @@ class ApiFactory
             $op->setHttpMethod($httpMethod);
 
             if ($isRest) {
-                $description = isset($docsArray[$serviceClassName]['collection'][$httpMethod]['description'])
-                    ? $docsArray[$serviceClassName]['collection'][$httpMethod]['description']
-                    : '';
+                $description = $docsArray[$serviceClassName]['collection'][$httpMethod]['description'] ?? '';
                 $op->setDescription($description);
 
-                $requestDescription = isset($docsArray[$serviceClassName]['collection'][$httpMethod]['request'])
-                    ? $docsArray[$serviceClassName]['collection'][$httpMethod]['request']
-                    : '';
+                $requestDescription = $docsArray[$serviceClassName]['collection'][$httpMethod]['request'] ?? '';
                 $op->setRequestDescription($requestDescription);
 
-                $responseDescription = isset($docsArray[$serviceClassName]['collection'][$httpMethod]['response'])
-                    ? $docsArray[$serviceClassName]['collection'][$httpMethod]['response']
-                    : '';
+                $responseDescription = $docsArray[$serviceClassName]['collection'][$httpMethod]['response'] ?? '';
 
                 $op->setResponseDescription($responseDescription);
                 $op->setRequiresAuthorization(
-                    isset($authorizations['collection'][$httpMethod])
-                    ? $authorizations['collection'][$httpMethod]
-                    : false
+                    $authorizations['collection'][$httpMethod] ?? false
                 );
 
                 $op->setResponseStatusCodes($this->getStatusCodes(
@@ -256,25 +248,17 @@ class ApiFactory
             }
 
             if ($isRpc) {
-                $description = isset($docsArray[$serviceClassName][$httpMethod]['description'])
-                    ? $docsArray[$serviceClassName][$httpMethod]['description']
-                    : '';
+                $description = $docsArray[$serviceClassName][$httpMethod]['description'] ?? '';
                 $op->setDescription($description);
 
-                $requestDescription = isset($docsArray[$serviceClassName][$httpMethod]['request'])
-                    ? $docsArray[$serviceClassName][$httpMethod]['request']
-                    : '';
+                $requestDescription = $docsArray[$serviceClassName][$httpMethod]['request'] ?? '';
                 $op->setRequestDescription($requestDescription);
 
-                $responseDescription = isset($docsArray[$serviceClassName][$httpMethod]['response'])
-                    ? $docsArray[$serviceClassName][$httpMethod]['response']
-                    : '';
+                $responseDescription = $docsArray[$serviceClassName][$httpMethod]['response'] ?? '';
                 $op->setResponseDescription($responseDescription);
 
                 $op->setRequiresAuthorization(
-                    isset($authorizations['actions'][$serviceData['action']][$httpMethod])
-                    ? $authorizations['actions'][$serviceData['action']][$httpMethod]
-                    : false
+                    $authorizations['actions'][$serviceData['action']][$httpMethod] ?? false
                 );
                 $op->setResponseStatusCodes($this->getStatusCodes(
                     $httpMethod,
@@ -296,25 +280,17 @@ class ApiFactory
                 $op = new Operation();
                 $op->setHttpMethod($httpMethod);
 
-                $description = isset($docsArray[$serviceClassName]['entity'][$httpMethod]['description'])
-                    ? $docsArray[$serviceClassName]['entity'][$httpMethod]['description']
-                    : '';
+                $description = $docsArray[$serviceClassName]['entity'][$httpMethod]['description'] ?? '';
                 $op->setDescription($description);
 
-                $requestDescription = isset($docsArray[$serviceClassName]['entity'][$httpMethod]['request'])
-                    ? $docsArray[$serviceClassName]['entity'][$httpMethod]['request']
-                    : '';
+                $requestDescription = $docsArray[$serviceClassName]['entity'][$httpMethod]['request'] ?? '';
                 $op->setRequestDescription($requestDescription);
 
-                $responseDescription = isset($docsArray[$serviceClassName]['entity'][$httpMethod]['response'])
-                    ? $docsArray[$serviceClassName]['entity'][$httpMethod]['response']
-                    : '';
+                $responseDescription = $docsArray[$serviceClassName]['entity'][$httpMethod]['response'] ?? '';
                 $op->setResponseDescription($responseDescription);
 
                 $op->setRequiresAuthorization(
-                    isset($authorizations['entity'][$httpMethod])
-                    ? $authorizations['entity'][$httpMethod]
-                    : false
+                    $authorizations['entity'][$httpMethod] ?? false
                 );
                 $op->setResponseStatusCodes($this->getStatusCodes(
                     $httpMethod,
@@ -364,22 +340,24 @@ class ApiFactory
         $flatFields = [];
 
         foreach ($fields as $idx => $field) {
-            if (isset($field['type'], $field['input_filter'])
+            if (
+                isset($field['type'], $field['input_filter'])
                 && ($field['type'] === CollectionInputFilter::class
                     || is_subclass_of($field['type'], CollectionInputFilter::class))
             ) {
                 $filteredFields = array_diff_key($field['input_filter'], ['type' => 0]);
-                $fullindex = $prefix ? sprintf('%s/%s[]', $prefix, $idx) : $idx . '[]';
-                $flatFields = array_merge($flatFields, $this->mapFields($filteredFields, $fullindex));
+                $fullindex      = $prefix ? sprintf('%s/%s[]', $prefix, $idx) : $idx . '[]';
+                $flatFields     = array_merge($flatFields, $this->mapFields($filteredFields, $fullindex));
                 continue;
             }
 
-            if (isset($field['type'])
+            if (
+                isset($field['type'])
                 && is_subclass_of($field['type'], InputFilterInterface::class)
             ) {
                 $filteredFields = array_diff_key($field, ['type' => 0]);
-                $fullindex = $prefix ? sprintf('%s/%s', $prefix, $idx) : $idx;
-                $flatFields = array_merge($flatFields, $this->mapFields($filteredFields, $fullindex));
+                $fullindex      = $prefix ? sprintf('%s/%s', $prefix, $idx) : $idx;
+                $flatFields     = array_merge($flatFields, $this->mapFields($filteredFields, $fullindex));
                 continue;
             }
 
@@ -433,7 +411,7 @@ class ApiFactory
         }
 
         $moduleConfigPath = $this->configModuleUtils->getModuleConfigPath($apiName);
-        $docConfigPath = dirname($moduleConfigPath) . '/documentation.config.php';
+        $docConfigPath    = dirname($moduleConfigPath) . '/documentation.config.php';
         if (file_exists($docConfigPath)) {
             $this->docs[$apiName] = include $docConfigPath;
         } else {
@@ -481,13 +459,18 @@ class ApiFactory
         return $route['options']['defaults']['action'];
     }
 
-    protected function hasOptionalSegments($route)
+    protected function hasOptionalSegments(string $route): bool
     {
         return preg_match('#\[.*?:.+\]#', $route);
     }
 
-    protected function getStatusCodes($httpMethod, $hasOptionalSegments, $hasValidation, $requiresAuthorization)
-    {
+    /** @psalm-return array{code:string, message:string} */
+    protected function getStatusCodes(
+        string $httpMethod,
+        bool $hasOptionalSegments,
+        bool $hasValidation,
+        bool $requiresAuthorization
+    ): array {
         $statusCodes = [
             ['code' => '406', 'message' => 'Not Acceptable'],
             ['code' => '415', 'message' => 'Unsupported Media Type'],

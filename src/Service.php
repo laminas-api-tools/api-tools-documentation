@@ -1,75 +1,48 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use ArrayIterator;
 use IteratorAggregate;
+use Laminas\ApiTools\Documentation\Api;
 
 class Service implements IteratorAggregate
 {
-    /**
-     * @var Api
-     */
+    /** @var Api */
     protected $api;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $route;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $routeIdentifierName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $contentNegotiator;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $requestAcceptTypes;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $requestContentTypes;
 
-    /**
-     * @var Operation[]
-     */
+    /** @var Operation[] */
     protected $operations;
 
-    /**
-     * @var Operation[]
-     */
+    /** @var Operation[] */
     protected $entityOperations;
 
-    /**
-     * @var Field[]
-     */
+    /** @var Field[] */
     protected $fields = [];
 
     /**
-     * @param \Laminas\ApiTools\Documentation\Api $api
+     * @param Api $api
      */
     public function setApi($api)
     {
@@ -77,7 +50,7 @@ class Service implements IteratorAggregate
     }
 
     /**
-     * @return \Laminas\ApiTools\Documentation\Api
+     * @return Api
      */
     public function getApi()
     {
@@ -237,11 +210,12 @@ class Service implements IteratorAggregate
     }
 
     /**
+     * @param string $type
      * @return Field[]
      */
     public function getFields($type)
     {
-        return isset($this->fields[$type]) ? $this->fields[$type] : [];
+        return $this->fields[$type] ?? [];
     }
 
     /**
@@ -252,12 +226,12 @@ class Service implements IteratorAggregate
     public function toArray()
     {
         $output = [
-            'name' => $this->name,
-            'description' => $this->description,
-            'route' => $this->route,
-            'route_identifier_name' => $this->routeIdentifierName,
-            'request_accept_types' => $this->requestAcceptTypes,
-            'request_content_types' => $this->requestContentTypes,
+            'name'                   => $this->name,
+            'description'            => $this->description,
+            'route'                  => $this->route,
+            'route_identifier_name'  => $this->routeIdentifierName,
+            'request_accept_types'   => $this->requestAcceptTypes,
+            'request_content_types'  => $this->requestContentTypes,
             'response_content_types' => $this->requestAcceptTypes,
         ];
 
@@ -280,7 +254,7 @@ class Service implements IteratorAggregate
 
             $operations[$method] = $op->toArray();
         }
-        $output['fields'] = $fields;
+        $output['fields']     = $fields;
         $output['operations'] = $operations;
 
         if ($this->entityOperations) {

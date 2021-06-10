@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use ArrayIterator;
@@ -13,35 +7,23 @@ use IteratorAggregate;
 
 class Field implements IteratorAggregate
 {
-    /**
-     * @var string
-     */
-    protected $name;
+    /** @var string */
+    protected $name = '';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description = '';
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $required = false;
 
-    /**
-     * @var null|string
-     */
-    protected $type = null;
+    /** @var null|string */
+    protected $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $fieldType = '';
 
-    /**
-     * @var string
-     */
-    protected $example;
+    /** @var string */
+    protected $example = '';
 
     /**
      * @param string $name
@@ -123,11 +105,16 @@ class Field implements IteratorAggregate
         $this->fieldType = $fieldType;
     }
 
+    /** @return string */
     public function getExample()
     {
         return $this->example;
     }
 
+    /**
+     * @param string $example
+     * @return $this
+     */
     public function setExample($example)
     {
         $this->example = $example;
@@ -144,9 +131,9 @@ class Field implements IteratorAggregate
     {
         return [
             'description' => $this->description,
-            'required' => $this->required,
-            'type' => $this->fieldType,
-            'example' => $this->example,
+            'required'    => $this->required,
+            'type'        => $this->fieldType,
+            'example'     => $this->example,
         ];
     }
 
