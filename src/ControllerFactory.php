@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use Interop\Container\ContainerInterface;
@@ -16,12 +10,11 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
 class ControllerFactory implements FactoryInterface
 {
     /**
-     * @param ContainerInterface $container
      * @param string $requestedName
      * @param null|array $options
      * @return Controller
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $viewHelpers = $container->get('ViewHelperManager');
 
@@ -33,7 +26,6 @@ class ControllerFactory implements FactoryInterface
     }
 
     /**
-     * @param ServiceLocatorInterface $container
      * @return Controller
      */
     public function createService(ServiceLocatorInterface $container)

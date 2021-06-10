@@ -1,77 +1,73 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 return [
-    'Test\\V1\\Rest\\FooBar\\Controller' => [
-        'collection' => [
-            'GET' => [
+    'Test\\V1\\Rest\\FooBar\\Controller'           => [
+        'collection'  => [
+            'GET'         => [
                 'description' => 'Collection FooBar GET!',
-                'request' => null,
-                'response' => '{
-   "_links": {
-       "self": {
-           "href": "/foo-bar"
-       },
-       "first": {
-           "href": "/foo-bar?page={page}"
-       },
-       "prev": {
-           "href": "/foo-bar?page={page}"
-       },
-       "next": {
-           "href": "/foo-bar?page={page}"
-       },
-       "last": {
-           "href": "/foo-bar?page={page}"
-       }
-   }
-   "_embedded": {
-       "foo_bar": [
-           {
-               "_links": {
-                   "self": {
-                       "href": "/foo-bar[/:foo_bar_id]"
-                   }
-               }
-              "goober": "This is the description for goober.",
-              "bergoo": ""
-           }
-       ]
-   }
-}',
+                'request'     => null,
+                'response'    => <<<'JSON'
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "/foo-bar"
+                            },
+                            "first": {
+                                "href": "/foo-bar?page={page}"
+                            },
+                            "prev": {
+                                "href": "/foo-bar?page={page}"
+                            },
+                            "next": {
+                                "href": "/foo-bar?page={page}"
+                            },
+                            "last": {
+                                "href": "/foo-bar?page={page}"
+                            }
+                        }
+                        "_embedded": {
+                            "foo_bar": [
+                                {
+                                    "_links": {
+                                        "self": {
+                                            "href": "/foo-bar[/:foo_bar_id]"
+                                        }
+                                    }
+                                   "goober": "This is the description for goober.",
+                                   "bergoo": ""
+                                }
+                            ]
+                        }
+                    }
+                    JSON,
             ],
-            'POST' => [
+            'POST'        => [
                 'description' => null,
-                'request' => null,
-                'response' => null,
+                'request'     => null,
+                'response'    => null,
             ],
             'description' => 'Some general notes about he FooBar collections',
         ],
-        'entity' => [
-            'GET' => [
+        'entity'      => [
+            'GET'         => [
                 'description' => null,
-                'request' => null,
-                'response' => null,
+                'request'     => null,
+                'response'    => null,
             ],
-            'PATCH' => [
+            'PATCH'       => [
                 'description' => null,
-                'request' => null,
-                'response' => null,
+                'request'     => null,
+                'response'    => null,
             ],
-            'PUT' => [
+            'PUT'         => [
                 'description' => null,
-                'request' => null,
-                'response' => null,
+                'request'     => null,
+                'response'    => null,
             ],
-            'DELETE' => [
+            'DELETE'      => [
                 'description' => null,
-                'request' => null,
-                'response' => null,
+                'request'     => null,
+                'response'    => null,
             ],
             'description' => 'Some general notes about he FooBar entities',
         ],
@@ -80,15 +76,15 @@ return [
     'Test\\V1\\Rest\\FooBarCollection\\Controller' => [
         'description' => 'Some general notes about the FooBarCollection rest service',
     ],
-    'Test\\V1\\Rpc\\Ping\\Controller' => [
-        'GET' => [
+    'Test\\V1\\Rpc\\Ping\\Controller'              => [
+        'GET'         => [
             'description' => 'Ping the API to see uptime and network lag',
-            'request' => null,
-            'response' => '{"ack": 123456789}',
+            'request'     => null,
+            'response'    => '{"ack": 123456789}',
         ],
         'description' => 'Ping the API',
     ],
-    'Test\\V1\\Rest\\Bands\\Controller' => [
+    'Test\\V1\\Rest\\Bands\\Controller'            => [
         'description' => 'A REST service about our favorite musical Bands.',
     ],
 ];

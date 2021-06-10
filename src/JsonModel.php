@@ -6,11 +6,13 @@ use Laminas\View\Model\JsonModel as BaseJsonModel;
 
 class JsonModel extends BaseJsonModel
 {
+    /** @return true */
     public function terminate()
     {
         return true;
     }
 
+    /** @return array */
     public function getVariables()
     {
         switch ($this->variables['type']) {

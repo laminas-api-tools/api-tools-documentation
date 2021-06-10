@@ -1,29 +1,28 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\View\Model\ViewModel;
+use ZF\Apigility\Documentation\View\AgAcceptHeaders;
+use ZF\Apigility\Documentation\View\AgContentTypeHeaders;
+use ZF\Apigility\Documentation\View\AgServicePath;
+use ZF\Apigility\Documentation\View\AgStatusCodes;
+use ZF\Apigility\Documentation\View\AgTransformDescription;
 
 return [
-    'router' => [
+    'router'                        => [
         'routes' => [
             'api-tools' => [
                 'child_routes' => [
                     'documentation' => [
-                        'type' => 'segment',
+                        'type'    => 'segment',
                         'options' => [
-                            'route'    => '/documentation[/:api[-v:version][/:service]]',
+                            'route'       => '/documentation[/:api[-v:version][/:service]]',
                             'constraints' => [
                                 'api' => '[a-zA-Z][a-zA-Z0-9_.%]+',
                             ],
-                            'defaults' => [
+                            'defaults'    => [
                                 'controller' => Controller::class,
                                 'action'     => 'show',
                             ],
@@ -33,18 +32,18 @@ return [
             ],
         ],
     ],
-    'service_manager' => [
+    'service_manager'               => [
         // Legacy Zend Framework aliases
-        'aliases' => [
+        'aliases'   => [
             \ZF\Apigility\Documentation\ApiFactory::class => ApiFactory::class,
         ],
         'factories' => [
             ApiFactory::class => Factory\ApiFactoryFactory::class,
         ],
     ],
-    'controllers' => [
+    'controllers'                   => [
         // Legacy Zend Framework aliases
-        'aliases' => [
+        'aliases'   => [
             \ZF\Apigility\Documentation\Controller::class => Controller::class,
         ],
         'factories' => [
@@ -52,7 +51,7 @@ return [
         ],
     ],
     'api-tools-content-negotiation' => [
-        'controllers' => [
+        'controllers'      => [
             Controller::class => 'Documentation',
         ],
         'accept_whitelist' => [
@@ -61,7 +60,7 @@ return [
                 1 => 'application/json',
             ],
         ],
-        'selectors' => [
+        'selectors'        => [
             'Documentation' => [
                 ViewModel::class => [
                     'text/html',
@@ -73,25 +72,25 @@ return [
             ],
         ],
     ],
-    'view_helpers' => [
-        'aliases' => [
-            'agacceptheaders'         => View\AgAcceptHeaders::class,
-            'agAcceptHeaders'         => View\AgAcceptHeaders::class,
-            'agcontenttypeheaders'    => View\AgContentTypeHeaders::class,
-            'agContentTypeHeaders'    => View\AgContentTypeHeaders::class,
-            'agservicepath'           => View\AgServicePath::class,
-            'agServicePath'           => View\AgServicePath::class,
-            'agstatuscodes'           => View\AgStatusCodes::class,
-            'agStatusCodes'           => View\AgStatusCodes::class,
-            'agtransformdescription'  => View\AgTransformDescription::class,
-            'agTransformDescription'  => View\AgTransformDescription::class,
+    'view_helpers'                  => [
+        'aliases'   => [
+            'agacceptheaders'        => View\AgAcceptHeaders::class,
+            'agAcceptHeaders'        => View\AgAcceptHeaders::class,
+            'agcontenttypeheaders'   => View\AgContentTypeHeaders::class,
+            'agContentTypeHeaders'   => View\AgContentTypeHeaders::class,
+            'agservicepath'          => View\AgServicePath::class,
+            'agServicePath'          => View\AgServicePath::class,
+            'agstatuscodes'          => View\AgStatusCodes::class,
+            'agStatusCodes'          => View\AgStatusCodes::class,
+            'agtransformdescription' => View\AgTransformDescription::class,
+            'agTransformDescription' => View\AgTransformDescription::class,
 
             // Legacy Zend Framework aliases
-            \ZF\Apigility\Documentation\View\AgAcceptHeaders::class => View\AgAcceptHeaders::class,
-            \ZF\Apigility\Documentation\View\AgContentTypeHeaders::class => View\AgContentTypeHeaders::class,
-            \ZF\Apigility\Documentation\View\AgServicePath::class => View\AgServicePath::class,
-            \ZF\Apigility\Documentation\View\AgStatusCodes::class => View\AgStatusCodes::class,
-            \ZF\Apigility\Documentation\View\AgTransformDescription::class => View\AgTransformDescription::class,
+            AgAcceptHeaders::class        => View\AgAcceptHeaders::class,
+            AgContentTypeHeaders::class   => View\AgContentTypeHeaders::class,
+            AgServicePath::class          => View\AgServicePath::class,
+            AgStatusCodes::class          => View\AgStatusCodes::class,
+            AgTransformDescription::class => View\AgTransformDescription::class,
         ],
         'factories' => [
             View\AgAcceptHeaders::class        => InvokableFactory::class,
@@ -101,7 +100,7 @@ return [
             View\AgTransformDescription::class => InvokableFactory::class,
         ],
     ],
-    'view_manager' => [
+    'view_manager'                  => [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],

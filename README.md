@@ -1,7 +1,6 @@
 # Laminas API Tools Documentation
 
-[![Build Status](https://travis-ci.com/laminas-api-tools/api-tools-documentation.svg?branch=master)](https://travis-ci.com/laminas-api-tools/api-tools-documentation)
-[![Coverage Status](https://coveralls.io/repos/github/laminas-api-tools/api-tools-documentation/badge.svg?branch=master)](https://coveralls.io/github/laminas-api-tools/api-tools-documentation?branch=master)
+[![Build Status](https://github.com/laminas-api-tools/api-tools-documentation/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/laminas-api-tools/api-tools-documentation/actions/workflows/continuous-integration.yml)
 
 ## Introduction
 

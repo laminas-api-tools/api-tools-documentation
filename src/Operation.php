@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use ArrayIterator;
@@ -13,19 +7,13 @@ use IteratorAggregate;
 
 class Operation implements IteratorAggregate
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $httpMethod;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $requestDescription = '';
 
     /**
@@ -35,9 +23,7 @@ class Operation implements IteratorAggregate
      */
     protected $requiresAuthorization = false;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $responseDescription = '';
 
     /**
@@ -151,11 +137,11 @@ class Operation implements IteratorAggregate
     public function toArray()
     {
         return [
-            'description' => $this->description,
-            'request' => $this->requestDescription,
+            'description'            => $this->description,
+            'request'                => $this->requestDescription,
             'requires_authorization' => $this->requiresAuthorization,
-            'response' => $this->responseDescription,
-            'response_status_codes' => $this->responseStatusCodes,
+            'response'               => $this->responseDescription,
+            'response_status_codes'  => $this->responseStatusCodes,
         ];
     }
 

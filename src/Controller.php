@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-documentation for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-documentation/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-documentation/blob/master/LICENSE.md New BSD License
- */
-
 namespace Laminas\ApiTools\Documentation;
 
 use Laminas\ApiTools\ContentNegotiation\ViewModel;
@@ -13,33 +7,24 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Helper\BasePath;
 use Laminas\View\Helper\ServerUrl;
 
+use function str_replace;
+
 class Controller extends AbstractActionController
 {
-    /**
-     * @var ApiFactory
-     */
+    /** @var ApiFactory */
     protected $apiFactory;
 
-    /**
-     * @var ServerUrl
-     */
+    /** @var ServerUrl */
     protected $serverUrlViewHelper;
 
-    /**
-     * @var BasePath|null
-     */
+    /** @var BasePath|null */
     private $basePath;
 
-    /**
-     * @param ApiFactory $apiFactory
-     * @param ServerUrl $serverUrlViewHelper
-     * @param BasePath $basePath
-     */
-    public function __construct(ApiFactory $apiFactory, ServerUrl $serverUrlViewHelper, BasePath $basePath = null)
+    public function __construct(ApiFactory $apiFactory, ServerUrl $serverUrlViewHelper, ?BasePath $basePath = null)
     {
-        $this->apiFactory = $apiFactory;
+        $this->apiFactory          = $apiFactory;
         $this->serverUrlViewHelper = $serverUrlViewHelper;
-        $this->basePath = $basePath;
+        $this->basePath            = $basePath;
     }
 
     /**
@@ -54,8 +39,8 @@ class Controller extends AbstractActionController
     {
         $basePath = $this->basePath ? $this->basePath->__invoke() : null;
 
-        $apiName = $this->normalizeApiName($this->params()->fromRoute('api'));
-        $apiVersion = $this->params()->fromRoute('version', '1');
+        $apiName     = $this->normalizeApiName($this->params()->fromRoute('api'));
+        $apiVersion  = $this->params()->fromRoute('version', '1');
         $serviceName = $this->params()->fromRoute('service');
 
         $viewModel = new ViewModel();
@@ -83,12 +68,8 @@ class Controller extends AbstractActionController
         return $viewModel;
     }
 
-    /**
-     * @param $name
-     * @return mixed
-     */
-    protected function normalizeApiName($name)
+    protected function normalizeApiName(?string $name): string
     {
-        return str_replace('.', '\\', $name);
+        return str_replace('.', '\\', (string) $name);
     }
 }
