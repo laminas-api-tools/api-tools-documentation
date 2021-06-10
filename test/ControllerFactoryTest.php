@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class ControllerFactoryTest extends TestCase
 {
-    public function testCreateController()
+    public function testCreateController(): void
     {
         $apiFactory = $this->getMockBuilder(ApiFactory::class)->disableOriginalConstructor()->getMock();
 

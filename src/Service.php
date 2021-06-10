@@ -43,6 +43,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param Api $api
+     * @return void
      */
     public function setApi($api)
     {
@@ -59,6 +60,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param string $name
+     * @return void
      */
     public function setName($name)
     {
@@ -75,6 +77,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {
@@ -91,6 +94,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param string $route
+     * @return void
      */
     public function setRoute($route)
     {
@@ -107,6 +111,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param string $identifierName
+     * @return void
      */
     public function setRouteIdentifierName($identifierName)
     {
@@ -123,6 +128,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param string $contentNegotiator
+     * @return void
      */
     public function setContentNegotiator($contentNegotiator)
     {
@@ -139,6 +145,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param array $requestAcceptTypes
+     * @return void
      */
     public function setRequestAcceptTypes($requestAcceptTypes)
     {
@@ -155,6 +162,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param array $requestContentTypes
+     * @return void
      */
     public function setRequestContentTypes($requestContentTypes)
     {
@@ -171,6 +179,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param Operation[] $operations
+     * @return void
      */
     public function setOperations($operations)
     {
@@ -187,6 +196,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param Operation[] $entityOperations
+     * @return void
      */
     public function setEntityOperations($entityOperations)
     {
@@ -203,6 +213,7 @@ class Service implements IteratorAggregate
 
     /**
      * @param array $fields
+     * @return void
      */
     public function setFields($fields)
     {
@@ -212,6 +223,7 @@ class Service implements IteratorAggregate
     /**
      * @param string $type
      * @return Field[]
+     * @psalm-return Field|Field[]|array<empty, empty>
      */
     public function getFields($type)
     {

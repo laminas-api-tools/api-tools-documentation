@@ -23,6 +23,7 @@ class Api implements IteratorAggregate
 
     /**
      * @param string $name
+     * @return void
      */
     public function setName($name)
     {
@@ -39,6 +40,7 @@ class Api implements IteratorAggregate
 
     /**
      * @param int|string $version
+     * @return void
      */
     public function setVersion($version)
     {
@@ -55,6 +57,7 @@ class Api implements IteratorAggregate
 
     /**
      * @param array $authorization
+     * @return void
      */
     public function setAuthorization($authorization)
     {
@@ -69,7 +72,7 @@ class Api implements IteratorAggregate
         return $this->authorization;
     }
 
-    public function addService(Service $service)
+    public function addService(Service $service): void
     {
         $this->services[] = $service;
     }

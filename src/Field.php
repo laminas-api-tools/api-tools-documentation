@@ -27,6 +27,7 @@ class Field implements IteratorAggregate
 
     /**
      * @param string $name
+     * @return void
      */
     public function setName($name)
     {
@@ -43,6 +44,7 @@ class Field implements IteratorAggregate
 
     /**
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {
@@ -59,6 +61,7 @@ class Field implements IteratorAggregate
 
     /**
      * @param bool $required
+     * @return void
      */
     public function setRequired($required)
     {
@@ -75,16 +78,14 @@ class Field implements IteratorAggregate
 
     /**
      * @param string $type
+     * @return void
      */
     public function setType($type)
     {
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -99,6 +100,7 @@ class Field implements IteratorAggregate
 
     /**
      * @param string $fieldType
+     * @return void
      */
     public function setFieldType($fieldType)
     {
