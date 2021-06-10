@@ -11,6 +11,7 @@ use Laminas\ApiTools\Documentation\Service;
 use Laminas\ApiTools\Provider\ApiToolsProviderInterface;
 use Laminas\ModuleManager\ModuleManager;
 use PHPUnit\Framework\TestCase;
+use Webmozart\Assert\Assert;
 
 use function array_filter;
 use function array_key_exists;
@@ -72,23 +73,24 @@ class ApiFactoryTest extends TestCase
         ],
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        $mockModule = $this->prophesize(ApiToolsProviderInterface::class)->reveal();
+        $mockModule = $this->createMock(ApiToolsProviderInterface::class);
 
-        $moduleManager = $this->prophesize(ModuleManager::class);
-        $moduleManager->getModules()->willReturn(['Test']);
-        $moduleManager->getModule('Test')->willReturn($mockModule);
+        $moduleManager = $this->createMock(ModuleManager::class);
+        $moduleManager->method('getModules')->willReturn(['Test']);
+        $moduleManager->method('getModule')->with('Test')->willReturn($mockModule);
 
-        $moduleUtils = $this->prophesize(ModuleUtils::class);
+        $moduleUtils = $this->createMock(ModuleUtils::class);
         $moduleUtils
-            ->getModuleConfigPath('Test')
+            ->method('getModuleConfigPath')
+            ->with('Test')
             ->willReturn(__DIR__ . '/TestAsset/module-config/module.config.php');
 
         $this->apiFactory = new ApiFactory(
-            $moduleManager->reveal(),
+            $moduleManager,
             include __DIR__ . '/TestAsset/module-config/module.config.php',
-            $moduleUtils->reveal()
+            $moduleUtils
         );
     }
 
@@ -134,7 +136,7 @@ class ApiFactoryTest extends TestCase
         }
     }
 
-    public function testCreateApiList()
+    public function testCreateApiList(): void
     {
         $apiList = $this->apiFactory->createApiList();
         $this->assertCount(1, $apiList);
@@ -142,11 +144,11 @@ class ApiFactoryTest extends TestCase
         $this->assertArrayHasKey('name', $api);
         $this->assertEquals('Test', $api['name']);
         $this->assertArrayHasKey('versions', $api);
-        $this->assertInternalType('array', $api['versions']);
+        $this->assertIsArray($api['versions']);
         $this->assertEquals(['1'], $api['versions']);
     }
 
-    public function testCreateApi()
+    public function testCreateApi(): void
     {
         $api = $this->apiFactory->createApi('Test', 1);
         $this->assertInstanceOf(Api::class, $api);
@@ -156,7 +158,7 @@ class ApiFactoryTest extends TestCase
         $this->assertCount(7, $api->getServices());
     }
 
-    public function testCreateRestService()
+    public function testCreateRestService(): void
     {
         $docConfig = include __DIR__ . '/TestAsset/module-config/documentation.config.php';
         $api       = $this->apiFactory->createApi('Test', 1);
@@ -168,6 +170,7 @@ class ApiFactoryTest extends TestCase
         $this->assertEquals($docConfig['Test\V1\Rest\FooBar\Controller']['description'], $service->getDescription());
 
         $fields = $service->getFields('input_filter');
+        Assert::isNonEmptyList($fields);
         $this->assertCount(5, $fields);
         $this->assertInstanceOf(Field::class, $fields[0]);
         $this->assertEquals('foogoober/subgoober', $fields[2]->getName());
@@ -227,7 +230,7 @@ class ApiFactoryTest extends TestCase
         }
     }
 
-    public function testCreateRestServiceWithCollection()
+    public function testCreateRestServiceWithCollection(): void
     {
         $docConfig = include __DIR__ . '/TestAsset/module-config/documentation.config.php';
         $api       = $this->apiFactory->createApi('Test', 1);
@@ -242,13 +245,19 @@ class ApiFactoryTest extends TestCase
         );
 
         $fields = $service->getFields('input_filter');
+        Assert::isNonEmptyList($fields);
         $this->assertCount(2, $fields);
 
-        $this->assertSame('FooBarCollection[]/FooBar', $fields[0]->getName());
-        $this->assertSame('AnotherCollection[]/FooBar', $fields[1]->getName());
+        $field = $fields[0];
+        $this->assertInstanceOf(Field::class, $field);
+        $this->assertSame('FooBarCollection[]/FooBar', $field->getName());
+
+        $field = $fields[1];
+        $this->assertInstanceOf(Field::class, $field);
+        $this->assertSame('AnotherCollection[]/FooBar', $field->getName());
     }
 
-    public function testCreateRestArtistsService()
+    public function testCreateRestArtistsService(): void
     {
         $docConfig = include __DIR__ . '/TestAsset/module-config/documentation.config.php';
 
@@ -264,22 +273,55 @@ class ApiFactoryTest extends TestCase
         );
 
         $fields = $service->getFields('input_filter');
-        self::assertCount(11, $fields);
+        Assert::isNonEmptyList($fields);
+        $this->assertCount(11, $fields);
 
-        self::assertSame('name', $fields[0]->getName());
-        self::assertSame('artists[]/first_name', $fields[1]->getName());
-        self::assertSame('artists[]/last_name', $fields[2]->getName());
-        self::assertSame('debut_album/title', $fields[3]->getName());
-        self::assertSame('debut_album/release_date', $fields[4]->getName());
-        self::assertSame('debut_album/tracks[]/number', $fields[5]->getName());
-        self::assertSame('debut_album/tracks[]/title', $fields[6]->getName());
-        self::assertSame('albums[]/title', $fields[7]->getName());
-        self::assertSame('albums[]/release_date', $fields[8]->getName());
-        self::assertSame('albums[]/tracks[]/number', $fields[9]->getName());
-        self::assertSame('albums[]/tracks[]/title', $fields[10]->getName());
+        $name = $fields[0];
+        $this->assertInstanceOf(Field::class, $name);
+        $this->assertSame('name', $name->getName());
+
+        $firstName = $fields[1];
+        $this->assertInstanceOf(Field::class, $firstName);
+        $this->assertSame('artists[]/first_name', $firstName->getName());
+
+        $lastName = $fields[2];
+        $this->assertInstanceOf(Field::class, $lastName);
+        $this->assertSame('artists[]/last_name', $lastName->getName());
+
+        $title = $fields[3];
+        $this->assertInstanceOf(Field::class, $title);
+        $this->assertSame('debut_album/title', $title->getName());
+
+        $releaseDate = $fields[4];
+        $this->assertInstanceOf(Field::class, $releaseDate);
+        $this->assertSame('debut_album/release_date', $releaseDate->getName());
+
+        $trackNumber = $fields[5];
+        $this->assertInstanceOf(Field::class, $trackNumber);
+        $this->assertSame('debut_album/tracks[]/number', $trackNumber->getName());
+
+        $trackTitle = $fields[6];
+        $this->assertInstanceOf(Field::class, $trackTitle);
+        $this->assertSame('debut_album/tracks[]/title', $trackTitle->getName());
+
+        $albumTitle = $fields[7];
+        $this->assertInstanceOf(Field::class, $albumTitle);
+        $this->assertSame('albums[]/title', $albumTitle->getName());
+
+        $albumReleaseDate = $fields[8];
+        $this->assertInstanceOf(Field::class, $albumReleaseDate);
+        $this->assertSame('albums[]/release_date', $albumReleaseDate->getName());
+
+        $albumTrackNumber = $fields[9];
+        $this->assertInstanceOf(Field::class, $albumTrackNumber);
+        $this->assertSame('albums[]/tracks[]/number', $albumTrackNumber->getName());
+
+        $albumTrackTitle = $fields[10];
+        $this->assertInstanceOf(Field::class, $albumTrackTitle);
+        $this->assertSame('albums[]/tracks[]/title', $albumTrackTitle->getName());
     }
 
-    public function testCreateRpcService()
+    public function testCreateRpcService(): void
     {
         $docConfig = include __DIR__ . '/TestAsset/module-config/documentation.config.php';
         $api       = $this->apiFactory->createApi('Test', 1);
@@ -320,10 +362,11 @@ class ApiFactoryTest extends TestCase
         }
     }
 
-    public function testGetFieldsForEntityMethods()
+    public function testGetFieldsForEntityMethods(): void
     {
         $api     = $this->apiFactory->createApi('Test', 1);
         $service = $this->apiFactory->createService($api, 'EntityFields');
+        $this->assertInstanceOf(Service::class, $service);
         $this->assertEquals('EntityFields', $service->getName());
         $this->assertCount(1, $service->getFields('PUT'));
     }

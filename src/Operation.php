@@ -35,6 +35,7 @@ class Operation implements IteratorAggregate
 
     /**
      * @param string $httpMethod
+     * @return void
      */
     public function setHttpMethod($httpMethod)
     {
@@ -51,6 +52,7 @@ class Operation implements IteratorAggregate
 
     /**
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {
@@ -67,6 +69,7 @@ class Operation implements IteratorAggregate
 
     /**
      * @param string $requestDescription
+     * @return void
      */
     public function setRequestDescription($requestDescription)
     {
@@ -83,6 +86,7 @@ class Operation implements IteratorAggregate
 
     /**
      * @param bool $flag
+     * @return void
      */
     public function setRequiresAuthorization($flag)
     {
@@ -99,6 +103,7 @@ class Operation implements IteratorAggregate
 
     /**
      * @param string $responseDescription
+     * @return void
      */
     public function setResponseDescription($responseDescription)
     {
@@ -115,6 +120,7 @@ class Operation implements IteratorAggregate
 
     /**
      * @param array $statusCodes
+     * @return void
      */
     public function setResponseStatusCodes(array $statusCodes)
     {

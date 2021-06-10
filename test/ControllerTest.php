@@ -28,7 +28,7 @@ class ControllerTest extends TestCase
     /** @var ApiFactory|PHPUnit_Framework_MockObject_MockObject */
     private $apiFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->apiFactory = $this->getMockBuilder(ApiFactory::class)->disableOriginalConstructor()->getMock();
         $this->serverUrl  = new ServerUrl();
@@ -43,7 +43,7 @@ class ControllerTest extends TestCase
         }
     }
 
-    public function testViewModelMissingBasePath()
+    public function testViewModelMissingBasePath(): void
     {
         $this->serverUrl->setScheme('https');
         $this->serverUrl->setHost('localhost');
@@ -59,7 +59,7 @@ class ControllerTest extends TestCase
         self::assertEquals('https://localhost', $viewModel->getVariable('baseUrl'));
     }
 
-    public function testSetBaseUrlIntoViewModel()
+    public function testSetBaseUrlIntoViewModel(): void
     {
         $this->serverUrl->setScheme('https');
         $this->serverUrl->setHost('localhost');

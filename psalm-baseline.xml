@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
+  <file src="src/Api.php">
+    <MissingConstructor occurrences="2">
+      <code>$authorization</code>
+      <code>$name</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/ApiFactory.php">
+    <MixedArgument occurrences="49">
+      <code>$authorizations['actions'][$serviceData['action']][$httpMethod] ?? false</code>
+      <code>$authorizations['collection'][$httpMethod] ?? false</code>
+      <code>$authorizations['entity'][$httpMethod] ?? false</code>
+      <code>$description</code>
+      <code>$description</code>
+      <code>$description</code>
+      <code>$docsArray[$serviceClassName]['description']</code>
+      <code>$field</code>
+      <code>$fieldData</code>
+      <code>$fieldData['description']</code>
+      <code>$fieldData['example']</code>
+      <code>$fieldData['field_type']</code>
+      <code>$fieldData['name']</code>
+      <code>$fieldData['type']</code>
+      <code>$field['input_filter']</code>
+      <code>$field['type']</code>
+      <code>$field['type']</code>
+      <code>$fields['name']</code>
+      <code>$httpMethod</code>
+      <code>$httpMethod</code>
+      <code>$httpMethod</code>
+      <code>$httpMethod</code>
+      <code>$httpMethod</code>
+      <code>$moduleName</code>
+      <code>$moduleName</code>
+      <code>$requestDescription</code>
+      <code>$requestDescription</code>
+      <code>$requestDescription</code>
+      <code>$responseDescription</code>
+      <code>$responseDescription</code>
+      <code>$responseDescription</code>
+      <code>$route</code>
+      <code>$route</code>
+      <code>$serviceClassName</code>
+      <code>$serviceClassName</code>
+      <code>$serviceClassName</code>
+      <code>$serviceClassName</code>
+      <code>$serviceClassName</code>
+      <code>$serviceClassName</code>
+      <code>$serviceConfig['service_name']</code>
+      <code>$serviceData['route_identifier_name']</code>
+      <code>$serviceData['service_name']</code>
+      <code>$this-&gt;config['api-tools-content-negotiation']['accept_whitelist'][$serviceClassName]</code>
+      <code>$this-&gt;config['api-tools-content-negotiation']['content_type_whitelist'][$serviceClassName]</code>
+      <code>$this-&gt;config['api-tools-rest']</code>
+      <code>$this-&gt;config['api-tools-rest']</code>
+      <code>$this-&gt;config['api-tools-rpc']</code>
+      <code>$this-&gt;config['api-tools-rpc']</code>
+      <code>$this-&gt;config['input_filter_specs'][$validatorName]</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="4">
+      <code>$fullindex</code>
+      <code>$serviceName</code>
+      <code>$serviceName</code>
+      <code>$serviceName</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="14">
+      <code>$authorizations['actions'][$serviceData['action']]</code>
+      <code>$docsArray[$serviceClassName][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]['collection']</code>
+      <code>$docsArray[$serviceClassName]['collection']</code>
+      <code>$docsArray[$serviceClassName]['collection']</code>
+      <code>$docsArray[$serviceClassName]['entity']</code>
+      <code>$docsArray[$serviceClassName]['entity']</code>
+      <code>$docsArray[$serviceClassName]['entity']</code>
+      <code>$route['options']</code>
+      <code>$serviceConfig['service_name']</code>
+      <code>$this-&gt;config['router']['routes']</code>
+      <code>$this-&gt;config['router']['routes']</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset occurrences="21">
+      <code>$authorizations['actions'][$serviceData['action']]</code>
+      <code>$authorizations['collection'][$httpMethod]</code>
+      <code>$authorizations['entity'][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]</code>
+      <code>$docsArray[$serviceClassName][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]['collection'][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]['collection'][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]['collection'][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]['entity'][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]['entity'][$httpMethod]</code>
+      <code>$docsArray[$serviceClassName]['entity'][$httpMethod]</code>
+      <code>$fields[$validatorKey]</code>
+      <code>$this-&gt;config['api-tools-content-negotiation']['accept_whitelist'][$serviceClassName]</code>
+      <code>$this-&gt;config['api-tools-content-negotiation']['content_type_whitelist'][$serviceClassName]</code>
+      <code>$this-&gt;config['api-tools-content-validation'][$serviceClassName]</code>
+      <code>$this-&gt;config['input_filter_specs'][$validatorName]</code>
+      <code>$this-&gt;config['router']['routes'][$config['route_name']]</code>
+      <code>$this-&gt;config['router']['routes'][$config['route_name']]</code>
+      <code>$this-&gt;config['router']['routes'][$serviceData['route_name']]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="29">
+      <code>$baseOperationData</code>
+      <code>$description</code>
+      <code>$description</code>
+      <code>$description</code>
+      <code>$field</code>
+      <code>$fieldData</code>
+      <code>$httpMethod</code>
+      <code>$httpMethod</code>
+      <code>$module</code>
+      <code>$moduleName</code>
+      <code>$requestDescription</code>
+      <code>$requestDescription</code>
+      <code>$requestDescription</code>
+      <code>$responseDescription</code>
+      <code>$responseDescription</code>
+      <code>$responseDescription</code>
+      <code>$restConfig</code>
+      <code>$route</code>
+      <code>$route</code>
+      <code>$rpcConfig</code>
+      <code>$serviceClassName</code>
+      <code>$serviceClassName</code>
+      <code>$serviceConfig</code>
+      <code>$serviceConfig</code>
+      <code>$validatorKey</code>
+      <code>$validatorName</code>
+      <code>$validators</code>
+      <code>$version</code>
+      <code>$versions[]</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="3">
+      <code>array</code>
+      <code>array</code>
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="4">
+      <code>$route['options']['defaults']['action']</code>
+      <code>$this-&gt;config['api-tools-mvc-auth']['authorization'][$serviceName]</code>
+      <code>$this-&gt;docs[$apiName]</code>
+      <code>$this-&gt;docs[$apiName]</code>
+    </MixedReturnStatement>
+    <PossiblyInvalidArgument occurrences="2">
+      <code>$field</code>
+      <code>$rpcConfig</code>
+    </PossiblyInvalidArgument>
+    <UnusedVariable occurrences="1">
+      <code>$serviceConfig</code>
+    </UnusedVariable>
+  </file>
+  <file src="src/Controller.php">
+    <MixedArgument occurrences="3">
+      <code>$apiVersion</code>
+      <code>$serviceName</code>
+      <code>$this-&gt;params()-&gt;fromRoute('api')</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$apiVersion</code>
+      <code>$serviceName</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="3">
+      <code>fromRoute</code>
+      <code>fromRoute</code>
+      <code>fromRoute</code>
+    </MixedMethodCall>
+    <PropertyNotSetInConstructor occurrences="5">
+      <code>Controller</code>
+      <code>Controller</code>
+      <code>Controller</code>
+      <code>Controller</code>
+      <code>Controller</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/ControllerFactory.php">
+    <DeprecatedInterface occurrences="1">
+      <code>ControllerFactory</code>
+    </DeprecatedInterface>
+    <DeprecatedMethod occurrences="1">
+      <code>getServiceLocator</code>
+    </DeprecatedMethod>
+    <MixedArgument occurrences="3">
+      <code>$container-&gt;get(ApiFactory::class)</code>
+      <code>$viewHelpers-&gt;get('BasePath')</code>
+      <code>$viewHelpers-&gt;get('ServerUrl')</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$viewHelpers</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="2">
+      <code>get</code>
+      <code>get</code>
+    </MixedMethodCall>
+    <ParamNameMismatch occurrences="1">
+      <code>$container</code>
+    </ParamNameMismatch>
+  </file>
+  <file src="src/Factory/ApiFactoryFactory.php">
+    <MixedArgument occurrences="3">
+      <code>$container-&gt;get('ModuleManager')</code>
+      <code>$container-&gt;get('config')</code>
+      <code>$container-&gt;get(ModuleUtils::class)</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Field.php">
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(bool) $required</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/JsonModel.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="1">
+      <code>toArray</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;variables['apis']</code>
+      <code>$this-&gt;variables['documentation']-&gt;toArray()</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Module.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>array&lt;string, mixed&gt;</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>include __DIR__ . '/../config/module.config.php'</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Operation.php">
+    <MissingConstructor occurrences="2">
+      <code>$description</code>
+      <code>$httpMethod</code>
+    </MissingConstructor>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(bool) $flag</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/Service.php">
+    <MissingConstructor occurrences="10">
+      <code>$api</code>
+      <code>$contentNegotiator</code>
+      <code>$description</code>
+      <code>$entityOperations</code>
+      <code>$name</code>
+      <code>$operations</code>
+      <code>$requestAcceptTypes</code>
+      <code>$requestContentTypes</code>
+      <code>$route</code>
+      <code>$routeIdentifierName</code>
+    </MissingConstructor>
+    <MixedArrayOffset occurrences="2">
+      <code>$fields[$method][$field-&gt;getName()]</code>
+      <code>$fields['input_filter'][$field-&gt;getName()]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="4">
+      <code>$field</code>
+      <code>$field</code>
+      <code>$fields[$method][$field-&gt;getName()]</code>
+      <code>$fields['input_filter'][$field-&gt;getName()]</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="4">
+      <code>getName</code>
+      <code>getName</code>
+      <code>toArray</code>
+      <code>toArray</code>
+    </MixedMethodCall>
+    <MixedPropertyTypeCoercion occurrences="1">
+      <code>$fields</code>
+    </MixedPropertyTypeCoercion>
+  </file>
+  <file src="src/View/AgAcceptHeaders.php">
+    <MixedArgument occurrences="1">
+      <code>$view-&gt;escapeHtml($type)</code>
+    </MixedArgument>
+    <PossiblyNullReference occurrences="1">
+      <code>escapeHtml</code>
+    </PossiblyNullReference>
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>escapeHtml</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/View/AgContentTypeHeaders.php">
+    <MixedArgument occurrences="1">
+      <code>$view-&gt;escapeHtml($type)</code>
+    </MixedArgument>
+    <PossiblyNullReference occurrences="1">
+      <code>escapeHtml</code>
+    </PossiblyNullReference>
+    <UndefinedInterfaceMethod occurrences="1">
+      <code>escapeHtml</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/View/AgStatusCodes.php">
+    <MixedArgument occurrences="2">
+      <code>$view-&gt;escapeHtml($status['code'])</code>
+      <code>$view-&gt;escapeHtml($status['message'])</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$status['code']</code>
+      <code>$status['message']</code>
+    </MixedArrayAccess>
+    <PossiblyNullReference occurrences="2">
+      <code>escapeHtml</code>
+      <code>escapeHtml</code>
+    </PossiblyNullReference>
+    <UndefinedInterfaceMethod occurrences="2">
+      <code>escapeHtml</code>
+      <code>escapeHtml</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="test/ApiFactoryTest.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>is_array($code)</code>
+    </DocblockTypeContradiction>
+    <InvalidScalarArgument occurrences="2">
+      <code>1</code>
+      <code>1</code>
+    </InvalidScalarArgument>
+    <MixedArgument occurrences="2">
+      <code>$api</code>
+      <code>$api</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="6">
+      <code>$statusCodes</code>
+      <code>$statusCodes</code>
+      <code>$statusCodes</code>
+      <code>$statusCodes</code>
+      <code>$statusCodes</code>
+      <code>$statusCodes</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="2">
+      <code>$api['name']</code>
+      <code>$api['versions']</code>
+      <code>$api['versions']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$api</code>
+    </MixedAssignment>
+    <PossiblyNullArgument occurrences="2">
+      <code>var_export($actualCodes, 1)</code>
+      <code>var_export($expectedCodes, 1)</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="test/ControllerTest.php">
+    <MixedArgument occurrences="1">
+      <code>new \Laminas\Mvc\Router\RouteMatch([])</code>
+    </MixedArgument>
+    <PossiblyInvalidArgument occurrences="2">
+      <code>$this-&gt;apiFactory</code>
+      <code>$this-&gt;apiFactory</code>
+    </PossiblyInvalidArgument>
+    <UndefinedDocblockClass occurrences="1">
+      <code>ApiFactory|PHPUnit_Framework_MockObject_MockObject</code>
+    </UndefinedDocblockClass>
+  </file>
+</files>

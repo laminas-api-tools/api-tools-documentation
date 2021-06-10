@@ -135,7 +135,7 @@ class ApiFactory
      * an API module
      *
      * @param string $serviceName
-     * @return Service
+     * @return Service|false
      */
     public function createService(Api $api, $serviceName)
     {
@@ -464,7 +464,10 @@ class ApiFactory
         return (bool) preg_match('#\[.*?:.+\]#', $route);
     }
 
-    /** @psalm-return array{code:string, message:string} */
+    /**
+     * @return string[][]
+     * @psalm-return array<array-key, array{code: string, message: string}>
+     */
     protected function getStatusCodes(
         string $httpMethod,
         bool $hasOptionalSegments,
