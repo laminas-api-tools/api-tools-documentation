@@ -9,6 +9,11 @@
     ],
     "homepage": "https://api-tools.getlaminas.org",
     "license": "BSD-3-Clause",
+    "extra": {
+        "laminas": {
+            "module": "Laminas\\ApiTools\\Documentation"
+        }
+    },
     "require": {
         "php": "^7.3 || ~8.0.0",
         "laminas-api-tools/api-tools-configuration": "^1.2",
@@ -61,5 +66,11 @@
         "source": "https://github.com/laminas-api-tools/api-tools-documentation",
         "docs": "https://api-tools.getlaminas.org/documentation",
         "rss": "https://github.com/laminas-api-tools/api-tools-documentation/releases.atom"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/package-versions-deprecated": true
+        }
     }
 }
