@@ -30,7 +30,7 @@
         "zfcampus/zf-apigility-documentation": "*"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "~2.2.0",
+        "laminas/laminas-coding-standard": "~2.3.0",
         "laminas/laminas-stdlib": "^3.6.4",
         "phpunit/phpunit": "^9.5.10",
         "vimeo/psalm": "^4.7",
