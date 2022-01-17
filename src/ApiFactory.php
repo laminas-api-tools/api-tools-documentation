@@ -9,6 +9,7 @@ use Laminas\InputFilter\InputFilterInterface;
 use Laminas\ModuleManager\ModuleManager;
 
 use function array_diff_key;
+use function array_keys;
 use function array_merge;
 use function array_push;
 use function dirname;
@@ -70,7 +71,7 @@ class ApiFactory
                     $serviceConfigs = array_merge($serviceConfigs, $this->config['api-tools-rpc']);
                 }
 
-                foreach ($serviceConfigs as $serviceName => $serviceConfig) {
+                foreach (array_keys($serviceConfigs) as $serviceName) {
                     if (! preg_match($versionRegex, $serviceName, $matches)) {
                         continue;
                     }
