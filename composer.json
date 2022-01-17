@@ -36,7 +36,8 @@
         "phpunit/phpunit": "^9.3",
         "vimeo/psalm": "^4.7",
         "psalm/plugin-phpunit": "^0.16.0",
-        "webmozart/assert": "^1.10"
+        "webmozart/assert": "^1.10",
+        "laminas/laminas-db": "^2.13"
     },
     "autoload": {
         "psr-4": {

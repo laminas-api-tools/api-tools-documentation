@@ -97,6 +97,8 @@ class ApiFactoryTest extends TestCase
     /**
      * @param int|int[]|string|string[] $expectedCodes
      * @param int[]|string[] $actualCodes
+     * @psalm-param int|string|list<int|string> $expectedCodes
+     * @psalm-param list<int|string> $actualCodes
      */
     public function assertContainsStatusCodes($expectedCodes, array $actualCodes, string $message = ''): void
     {
@@ -118,21 +120,17 @@ class ApiFactoryTest extends TestCase
             return true;
         });
 
-        if (empty($expectedCodePairs)) {
-            $this->fail(sprintf(
-                'No codes provided, or no known codes match: %s',
-                var_export($expectedCodes, 1)
-            ));
-        }
+        $this->assertNotEmpty($expectedCodePairs, sprintf(
+            'No codes provided, or no known codes match: %s',
+            var_export($expectedCodes, true)
+        ));
 
         foreach ($expectedCodePairs as $code) {
-            if (! in_array($code, $actualCodes, true)) {
-                $this->fail(sprintf(
-                    "Failed to find code %s in actual codes:\n%s\n",
-                    $code['code'],
-                    var_export($actualCodes, 1)
-                ));
-            }
+            $this->assertContains($code, $actualCodes, sprintf(
+                "Failed to find code %s in actual codes:\n%s\n",
+                $code['code'],
+                var_export($actualCodes, true)
+            ));
         }
     }
 
@@ -196,7 +194,6 @@ class ApiFactoryTest extends TestCase
                     break;
                 default:
                     $this->fail('Unexpected HTTP method encountered: ' . $operation->getHttpMethod());
-                    break;
             }
         }
 
@@ -225,7 +222,6 @@ class ApiFactoryTest extends TestCase
                     break;
                 default:
                     $this->fail('Unexpected entity HTTP method encountered: ' . $operation->getHttpMethod());
-                    break;
             }
         }
     }
@@ -357,7 +353,6 @@ class ApiFactoryTest extends TestCase
                     break;
                 default:
                     $this->fail('Unexpected HTTP method encountered: ' . $operation->getHttpMethod());
-                    break;
             }
         }
     }
