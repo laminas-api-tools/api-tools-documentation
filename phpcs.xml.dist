@@ -19,5 +19,7 @@
     <file>view</file>
 
     <!-- Include all rules from Laminas Coding Standard -->
-    <rule ref="LaminasCodingStandard"/>
+    <rule ref="LaminasCodingStandard">
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing"/>
+    </rule>
 </ruleset>

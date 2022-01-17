@@ -5,6 +5,7 @@ namespace Laminas\ApiTools\Documentation;
 use ArrayIterator;
 use IteratorAggregate;
 use Laminas\ApiTools\Documentation\Api;
+use ReturnTypeWillChange;
 
 class Service implements IteratorAggregate
 {
@@ -287,6 +288,7 @@ class Service implements IteratorAggregate
      *
      * @return ArrayIterator
      */
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->toArray());

@@ -4,6 +4,7 @@ namespace Laminas\ApiTools\Documentation;
 
 use ArrayIterator;
 use IteratorAggregate;
+use ReturnTypeWillChange;
 
 //use Laminas\ApiTools\ContentNegotiation\ViewModel;
 
@@ -110,6 +111,7 @@ class Api implements IteratorAggregate
      *
      * @return ArrayIterator
      */
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->toArray());
