@@ -4,6 +4,7 @@ namespace Laminas\ApiTools\Documentation;
 
 use ArrayIterator;
 use IteratorAggregate;
+use ReturnTypeWillChange;
 
 class Operation implements IteratorAggregate
 {
@@ -158,6 +159,7 @@ class Operation implements IteratorAggregate
      *
      * @return ArrayIterator
      */
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->toArray());

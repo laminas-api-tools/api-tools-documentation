@@ -4,6 +4,7 @@ namespace Laminas\ApiTools\Documentation;
 
 use ArrayIterator;
 use IteratorAggregate;
+use ReturnTypeWillChange;
 
 class Field implements IteratorAggregate
 {
@@ -146,6 +147,7 @@ class Field implements IteratorAggregate
      *
      * @return ArrayIterator
      */
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->toArray());
