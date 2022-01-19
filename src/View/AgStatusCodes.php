@@ -15,13 +15,11 @@ class AgStatusCodes extends AbstractHelper
     public function __invoke(Operation $operation)
     {
         $view        = $this->getView();
-        $statusCodes = array_map(function ($status) use ($view) {
-            return sprintf(
-                '<li class="list-group-item"><strong>%s:</strong> %s</li>',
-                $view->escapeHtml($status['code']),
-                $view->escapeHtml($status['message'])
-            );
-        }, $operation->getResponseStatusCodes());
+        $statusCodes = array_map(static fn($status) => sprintf(
+            '<li class="list-group-item"><strong>%s:</strong> %s</li>',
+            $view->escapeHtml($status['code']),
+            $view->escapeHtml($status['message'])
+        ), $operation->getResponseStatusCodes());
 
         return sprintf("<ul class=\"list-group\">\n%s\n</ul>\n", implode("\n", $statusCodes));
     }

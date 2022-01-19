@@ -16,14 +16,11 @@ use function class_exists;
 
 class ControllerTest extends TestCase
 {
-    /** @var MvcEvent */
-    private $event;
+    private MvcEvent $event;
 
-    /** @var ServerUrl */
-    private $serverUrl;
+    private ServerUrl $serverUrl;
 
-    /** @var BasePath */
-    private $basePath;
+    private BasePath $basePath;
 
     /** @var ApiFactory|PHPUnit_Framework_MockObject_MockObject */
     private $apiFactory;

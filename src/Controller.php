@@ -17,8 +17,7 @@ class Controller extends AbstractActionController
     /** @var ServerUrl */
     protected $serverUrlViewHelper;
 
-    /** @var BasePath|null */
-    private $basePath;
+    private ?BasePath $basePath;
 
     public function __construct(ApiFactory $apiFactory, ServerUrl $serverUrlViewHelper, ?BasePath $basePath = null)
     {

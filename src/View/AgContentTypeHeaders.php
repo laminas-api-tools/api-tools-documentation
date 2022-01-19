@@ -24,9 +24,8 @@ class AgContentTypeHeaders extends AbstractHelper
         }
 
         $view  = $this->getView();
-        $types = array_map(function ($type) use ($view) {
-            return sprintf('<div class="list-group-item">%s</div>', $view->escapeHtml($type));
-        }, $requestContentTypes);
+        $types = array_map(static fn($type) =>
+            sprintf('<div class="list-group-item">%s</div>', $view->escapeHtml($type)), $requestContentTypes);
         return implode("\n", $types);
     }
 }
