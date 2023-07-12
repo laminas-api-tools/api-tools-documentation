@@ -2,10 +2,10 @@
 
 namespace Laminas\ApiTools\Documentation;
 
-use interop\container\containerinterface;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Psr\Container\ContainerInterface;
 
 class ControllerFactory implements FactoryInterface
 {
@@ -14,7 +14,7 @@ class ControllerFactory implements FactoryInterface
      * @param null|array $options
      * @return Controller
      */
-    public function __invoke(containerinterface $container, $requestedName, ?array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $viewHelpers = $container->get('ViewHelperManager');
 
