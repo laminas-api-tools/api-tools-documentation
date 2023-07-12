@@ -2,7 +2,7 @@
 
 namespace Laminas\ApiTools\Documentation\Factory;
 
-use Interop\Container\ContainerInterface;
+use interop\container\containerinterface;
 use Laminas\ApiTools\Configuration\ModuleUtils;
 use Laminas\ApiTools\Documentation\ApiFactory;
 
@@ -11,7 +11,7 @@ class ApiFactoryFactory
     /**
      * @return ApiFactory
      */
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(containerinterface $container)
     {
         return new ApiFactory(
             $container->get('ModuleManager'),
