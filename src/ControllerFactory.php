@@ -2,10 +2,10 @@
 
 namespace Laminas\ApiTools\Documentation;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Psr\Container\ContainerInterface;
 
 class ControllerFactory implements FactoryInterface
 {

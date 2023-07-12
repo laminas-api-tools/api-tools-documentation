@@ -15,10 +15,10 @@
         }
     },
     "require": {
-        "php": "^7.4 || ~8.0.0 || ~8.1.0",
-        "laminas-api-tools/api-tools-configuration": "^1.5",
-        "laminas-api-tools/api-tools-content-negotiation": "^1.7",
-        "laminas-api-tools/api-tools-provider": "^1.5",
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+        "laminas-api-tools/api-tools-configuration": "^1.6",
+        "laminas-api-tools/api-tools-content-negotiation": "^1.8",
+        "laminas-api-tools/api-tools-provider": "^1.6",
         "laminas/laminas-inputfilter": "^2.13",
         "laminas/laminas-modulemanager": "^2.11",
         "laminas/laminas-mvc": "^3.3",
@@ -71,6 +71,9 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "composer/package-versions-deprecated": true
+        },
+        "platform": {
+            "php": "8.0.99"
         }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Laminas\ApiTools\Documentation\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ModuleUtils;
 use Laminas\ApiTools\Documentation\ApiFactory;
+use Psr\Container\ContainerInterface;
 
 class ApiFactoryFactory
 {
